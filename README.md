@@ -1,3 +1,4 @@
+Support email: support@miner.finom.io
 Our Discord channel https://discord.gg/eyWkqG3
 
 # nanominer by nanopool
