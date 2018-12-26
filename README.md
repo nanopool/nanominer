@@ -1,3 +1,5 @@
+Our Discord channel https://discord.gg/eyWkqG3
+
 # nanominer by nanopool
 # version: 1.0
 **nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, CryptoNight (v6, v7, v8) and RandomHash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, Ubiq, Monero, PascalCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (for Ethash and CryptoNight algorithms). The RandomHash algorithm is supported only on CPU.
