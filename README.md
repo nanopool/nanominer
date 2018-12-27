@@ -1,4 +1,4 @@
-Support email: support@miner.finom.io  
+Support email: support@miner.nanopool.org  
 Community chat in telegram (developers read it too): https://t.me/nanominer_en  
 Our Discord channel https://discord.gg/eyWkqG3
 
