@@ -116,7 +116,7 @@ Optional algorithm parameter.
 This is the minimum acceptable hashrate. This function keeps track of the rig's total hashrate and compares it with this parameter. If five minutes after the miner is launched the set minimum is not reached, **nanominer** will automatically restart. Likewise, the miner will restart if for any reason the average hashrate over a ten-minute period falls below the set value. This value can be set with an optional modifier letter that represents a thousand for kilohash or a million for megahash per second. For example, setting the value to 100 megahashes per second can be written as 100M, 100.0M, 100m, 100000k, 100000K or 100000000. If this parameter is not defined, the miner will not restart (with the exception of the situations described in the _watchdog_ section).
 ### devices
 Optional paramter.
-These are the graphics cards that will be used by the miner. If you do not want to launch the miner on all available GPUs but only on some of them, their numbers can be provided in the _devices_ parameter separated by a comma. **nanominer** numbers the GPUs starting from zero in ascending order of their PCI addresses. You can see a list of available GPUs and the order in which they're in by launching **nanominer** with the _-d_ command line option:
+These are the graphics cards that will be used by the miner. If you do not want to launch the miner on all available GPUs but only on some of them, their numbers can be provided in the _devices_ parameter separated by a comma or space. **nanominer** numbers the GPUs starting from zero in ascending order of their PCI addresses. You can see a list of available GPUs and the order in which they're in by launching **nanominer** with the _-d_ command line option:
 ```
 nanominer -d
 ```
