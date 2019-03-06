@@ -1,19 +1,33 @@
-Support email: support@miner.nanopool.org  
-Community chat in telegram (developers read it too): https://t.me/nanominer_en  
-Our Discord channel https://discord.gg/eyWkqG3
-
 # nanominer by nanopool
-# version: 1.0
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, CryptoNight (v6, v7, v8) and RandomHash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, Ubiq, Monero, PascalCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (for Ethash and CryptoNight algorithms). The RandomHash algorithm is supported only on CPU.
+# version: 1.1
+# Table of Contents
+1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
+1. [Payment](#payment)
+1. [Setup](#setup)
+1. [Log Files](#log-files)
+1. [Remote Monitoring](#remote-monitoring)
+1. [Automatic Restart Function](#automatic-restart-function)
+1. [Parameters](#parameters)
+1. [Configuration File](#configuration-file)
+1. [Examples of Configuration Files](#examples-of-configuration-files)
+
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, CryptoNight (v6, v7, v8, **CryptoNightR - only NVIDIA GPUs are currently supported**) and RandomHash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, Ubiq, Monero, PascalCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (for Ethash and CryptoNight algorithms). The RandomHash algorithm is supported only on CPU.
 
 In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
 Testing on **nanominer** demonstrated high performance working with Ethereum, Ethereum Classic, Ubiq, Monero, PascalCoin and other currencies. As a result of the research carried out, it was found that **nanominer** performs on par with, and sometimes better than, competing program products. Independently of this, **nanominer** stands out with its high stability and simple setup.
+
+## Reporting bugs and technical support
+For reporting bugs, technical support, feature requests and community discussions feel free to use the following communication channels:
+* Support email: support@miner.nanopool.org
+* GitHub issues tracker: https://github.com/nanopool/nanominer/issues
+* Community chat in telegram (developers read it too): https://t.me/nanominer_en
+* Our Discord channel https://discord.gg/eyWkqG3
+
 ## Payment
 Payment for the use of **nanominer** takes the form of a commission from mining to its wallets. The commission is:
 - 1% of total mining time for any GPU algorithm;
-- 3% for RandomHash on CPU in case there is at least one GPU algorithm launched in parallel;
-- 5% for RandomHash on CPU in case there are no GPU algorithms launched in parallel.
+- 3% for RandomHash on CPU.
 
 ## Setup
 At launch **nanominer** reads the _config.ini_ setup file from the program's current directory. In order to
@@ -31,7 +45,9 @@ When **nanominer** starts up it displays the main work information in the consol
 The event log function on **nanominer** is automatically activated each time the program starts up. The log files that are created contain all the information displayed on the console while the miner is running. By default, the log files are saved in the logs folder of the program's current directory. Deactivating event logging, as well as assigning a random catalogue for recording log files, can be done by using the corresponding configuration parameters (see the examples in the _Parameters_ section of this file).
 
 ## Remote Monitoring
-**nanominer** supports BoringAPI for getting rig statistics. By default it starts a BoringAPI HTTP server on port 9090, which can be found on http://127.0.0.1:9090/stats. In the program's config file, the port can be configured and the API function can be deactived with the _port_ function.
+**nanominer** has web interface for getting rig statistics, discovering other instances of **nanominer** in the local network and managing them. You can edit miners' config via web as well as restart the miners. In order to perform these actions on a running instance of **nanominer**, its config must contain a password for web interface (see the _webPassword_ option).
+By default **nanominer** starts a HTTP server on port 9090, which can be found on http://127.0.0.1:9090. In the program's config file, the port can be configured and the API function can be deactived with the _webPort_ option (or it can be set to 0 to disable web interface).
+[BoringAPI](https://github.com/nanopool/BoringAPI) for getting rig statistics is supported aswell, which can be found on http://127.0.0.1:9090/stats.
 
 **nanominer** also supports the network API program EthMan for rig monitoring. By default it opens port 3333 in “read-only” mode without the ability to restart the miner or rig through the network. In the program's config file, the port can be configured and the API function can be deactived with the _mport_ function. The config file also lets you set a password for monitoring with the _ethmanPassword_ option.
 
@@ -45,7 +61,7 @@ Another function on **nanominer** that improves the miner's automatic functionin
 More detailed information on using these functions can be found in the _Parameters_ section of this file.
 
 ## Parameters
-The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “CryptoNightv8”, “CryptoNightv7”, “CryptoNight” or “RandomHash”. Configuration file must be in the following format:
+The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “CryptoNightR”, “CryptoNightv8”, “CryptoNightv7”, “CryptoNight” or “RandomHash”. Configuration file must be in the following format:
 ```
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
@@ -99,7 +115,7 @@ Optional algorithm parameter. Can be specified in common parameter section inste
 This is the user’s e-mail address. It is provided to the pool where the rig will be operating. The pool can use it when sending out service notifications.
 ### pool1, pool2, ...
 Optional algorithm parameter.
-This defines the set of mining pools used. Values must be given in the format url:port (e.g. `pool1=eth-eu1.nanopool.org:9999`). The parameters should be defined in ascending, sequential order, from pool1 to poolN (for example: pool1, pool2, pool3). The pool will be chosen automatically from the list in accordance with the maximum connection speed. If the pool (or list of pools) is not defined, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) that correspond to the chosen cryptocurrency.
+This defines the set of mining pools used. Values must be given in the format url:port (e.g. `pool1=eth-eu1.nanopool.org:9999`). The parameters should be defined in ascending, sequential order, from pool1 to poolN (for example: pool1, pool2, pool3). If the pool list is provided, the best pool will be chosen from the order of the pool list. If a `sortPools=true` option is specified, the best pool will be chosen by the connection speed. If the pool (or list of pools) is not defined, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) that correspond to the chosen cryptocurrency.
 
 ### protocol
 Optional algorithm parameter.
@@ -130,6 +146,14 @@ devices=3,1,0
 ``` 
 then the hashrate line will first display GPU3, then GPU1 and finally GPU0.
 
+### checkForUpdates
+Optional common parameter.
+This parameter accepts the values _true_ or _false_ (the default is _true_). If this parameter is set to _false_ then **nanominer** stops checking for the newest release version on every startup.
+
+### autoUpdate
+Optional common parameter.
+This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ and checking for updates is enabled, then **nanominer** will update itself on every startup, provided there is a newer version available.
+
 ### restarts
 Optional common parameter.
 This parameter sets the number of times the miner will restart before rebooting the rig. In case of GPU problems like hardware errors or lag, or in case of hashrate degradation (if the _minhashrate_ option is used), **nanominer** will restart. However, certain errors cannot be fixed by restarting the program. In such cases it is necessary to reboot the rig. To reboot, the miner loads the _reboot.bat_ script from the current directory if running on Windows or _reboot.sh_ if on Linux:
@@ -142,6 +166,20 @@ shutdown /r /t 5 /f
 ```
 The script must be written by the user.
 
+### coreClocks, memClocks
+Optional common parameters.
+Can be used to overclock/underclock NVIDIA GPU's under Windows OS. Absolute (e.g. 4200) as well as relative (e.g. +200, -150) values in megabytes are accepted. The values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). For example, if it is set as
+```
+coreClocks=+200,-150
+memClocks=+300,3900
+```
+then GPU0 will be overclocked by 200 MHz of core and 300 MHz of memory, whereas GPU1 core clock will be underclocked by 150 MHz, and its memory clock set to 3900 MHz.
+You can also apply same settings for each GPU by defining only one of the core and memory clock values, for example:
+```
+coreClocks=+200
+memClocks=+300
+```
+
 ### noLog
 Optional common parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then no log files will be recorded onto the hard drive.
@@ -151,9 +189,13 @@ Optional common parameter.
 This parameter can either be used to set the name of the folder in which log files will be created (e.g. `logPath=logfolder/`), or to specify a path to single file, which will be used for all logs (e.g. `logPath=logs/log.txt`, `logPath=/var/log/nanominer/log.txt`, `logPath=C:\logs\log.txt`). Both relative and absolute paths work.
 Default value for this parameter is _logs/_.
 
-### port
+### webPassword
 Optional common parameter.
-Port for BoringAPI monitoring server, which can be used for sending remote HTTP requests (e.g. http://127.0.0.1:9090/stats) for getting the mining statistics. The default port is 9090.
+Password for web interface. There is no password by default (web interface is read-only).
+
+### webPort
+Optional common parameter.
+Port for web interface. The default port is 9090. Zero value disables web interface.
 
 ### mport
 Optional common parameter.
@@ -291,7 +333,7 @@ pool1 = ubiq-eu.maxhash.org:8008
 ```
 Example of a complete file for Monero:
 ```
-[CryptoNightv8]
+[CryptoNightR]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 paymentId = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
@@ -304,7 +346,7 @@ pool5 = xmr-asia1.nanopool.org:14433
 ```
 Example of an equivalent file for Monero:
 ```
-[CryptoNightv8]
+[CryptoNightR]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 paymentId = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
@@ -312,7 +354,7 @@ email = someemail@org
 ```
 Example of a minimum file for Monero:
 ```
-[CryptoNightv8]
+[CryptoNightR]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ```
 Example of a complete file for PascalCoin:
@@ -356,7 +398,7 @@ rigName = rig1
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 devices = 0,1
-[CryptoNightv8]
+[CryptoNightR]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 paymentId = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 devices = 5
