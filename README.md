@@ -173,6 +173,7 @@ The typical content of the _reboot.bat_ script for Windows:
 shutdown /r /t 5 /f
 ```
 The script must be written by the user.
+To run reboot script instead of restarting miner every time a critical error occurs, just set `restarts=0`
 
 ### coreClocks, memClocks
 Optional common parameters.
@@ -221,9 +222,13 @@ Default value: -3333 (This means that the miner blocks management through API an
 Optional common parameter.
 Your password for monitoring with EthMan and other utilities that support the same network API.
 
-### shard
+### shardId
 Optional algorithm parameter.
-Can be used to set a shard ID for QuarkChain solo mining. Only shards using Ethash algorithm are supported. This parameter should be specified in hex, e.g. 0x1, 0x10001, 0x10002, etc. For more information on shards, visit [this](https://github.com/QuarkChain/pyquarkchain/wiki/Address,-Shard-Key,-Chain-Id,-Shard-Id) and [this](https://github.com/quarkChain/pyquarkchain/releases/latest) link.
+Can be used to set a shard ID for QuarkChain solo mining. Only shards using Ethash algorithm are supported. This parameter should be specified in hex, e.g. 0x1, 0x10001, 0x10002, etc. For more information on shards, visit [this](https://github.com/QuarkChain/pyquarkchain/wiki/Address,-Shard-Key,-Chain-Id,-Shard-Id) and [this](https://github.com/quarkChain/pyquarkchain/releases/latest) link. Default shard ID is 0x1.
+
+### farmRecheck
+Optional algorithm parameter.
+The interval (in milliseconds) between polling the node for new jobs in solo mining mode for QuarkChain. Default value is 200. 
 
 ### cpuThreads
 Optional algorithm parameter for CPU mining.
@@ -349,7 +354,8 @@ Example of a complete configuration file for solo QuarkChain mining:
 ```
 [Ethash]
 wallet=0 ;placeholder wallet for solo mining
-shard=1
+shardId=0x30001
+farmRecheck=200
 coin=Qkc
 pool1=localhost:38391
 protocol=getwork
