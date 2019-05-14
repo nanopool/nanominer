@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 1.2
+# version: 1.3
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -13,7 +13,6 @@
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
 **nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, CryptoNight (v6, v7, v8, CryptoNightR, Reverse Waltz), Cuckaroo29 and RandomHash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Graft, PascalCoin, GrinCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards with the following exceptions:
-* CryptoNightR and Reverse Waltz algorithms run on Nvidia GPUs only.
 * Cuckaroo29 algorithm is supported only on AMD cards with 8+ GB of memory.
 * The RandomHash algorithm is supported only on CPU.
 
@@ -189,6 +188,10 @@ coreClocks=+200
 memClocks=+300
 ```
 
+###powerLimits
+Optional common parameter.
+Can be used to set Nvidia cards power limits from -50 to 50. For example, -20 means 80% power limit, 10 means 110% power limit. The values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). You can also apply same settings for each GPU by defining only one of the power limit value.
+
 ### noLog
 Optional common parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then no log files will be recorded onto the hard drive.
@@ -224,7 +227,7 @@ Your password for monitoring with EthMan and other utilities that support the sa
 
 ### shardId
 Optional algorithm parameter.
-Can be used to set a shard ID for QuarkChain solo mining. Only shards using Ethash algorithm are supported. This parameter should be specified in hex, e.g. 0x1, 0x10001, 0x10002, etc. For more information on shards, visit [this](https://github.com/QuarkChain/pyquarkchain/wiki/Address,-Shard-Key,-Chain-Id,-Shard-Id) and [this](https://github.com/quarkChain/pyquarkchain/releases/latest) link. Default shard ID is 0x1.
+Can be used to set a shard ID for QuarkChain solo mining. This parameter should be specified in hex, e.g. 0x1, 0x10001, 0x10002, 0x50001, etc. For root chain shard ID `null` must be specified. For more information on shards, visit [this](https://github.com/QuarkChain/pyquarkchain/wiki/Address,-Shard-Key,-Chain-Id,-Shard-Id) and [this](https://github.com/quarkChain/pyquarkchain/releases/latest) link. Default shard ID is 0x1. Shard ID is passed to QuarkChain node "as is" so all current and future Ethash shards are supported.
 
 ### farmRecheck
 Optional algorithm parameter.
@@ -366,6 +369,15 @@ Example of a minimum file for solo QuarkChain mining:
 wallet=0 ;placeholder wallet for solo mining
 coin=Qkc
 pool1=localhost:38391
+shardId=0x50001
+```
+Example of a file for solo QuarkChain mining on root shard:
+```
+[Ethash]
+wallet=0 ;placeholder wallet for solo mining
+coin=Qkc
+pool1=localhost:38391
+shardId=null
 ```
 Example of a configuration file for Ubiq:
 ```
