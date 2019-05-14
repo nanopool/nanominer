@@ -188,7 +188,7 @@ coreClocks=+200
 memClocks=+300
 ```
 
-###powerLimits
+### powerLimits
 Optional common parameter.
 Can be used to set Nvidia cards power limits from -50 to 50. For example, -20 means 80% power limit, 10 means 110% power limit. The values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). You can also apply same settings for each GPU by defining only one of the power limit value.
 
