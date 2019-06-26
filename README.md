@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 1.3
+# version: 1.4
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -176,13 +176,13 @@ To run reboot script instead of restarting miner every time a critical error occ
 
 ### coreClocks, memClocks
 Optional common parameters.
-Can be used to overclock/underclock NVIDIA GPU's. Absolute (e.g. 4200) as well as relative (e.g. +200, -150) values in MHz are accepted. The values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). For example, if it is set as
+Can be used to overclock/underclock NVIDIA GPU's. Absolute (e.g. 4200) as well as relative (e.g. +200, -150) values in MHz are accepted. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). For example, if it is set as
 ```
 coreClocks=+200,-150
 memClocks=+300,3900
 ```
 then GPU0 will be overclocked by 200 MHz of core and 300 MHz of memory, whereas GPU1 core clock will be underclocked by 150 MHz, and its memory clock set to 3900 MHz.
-You can also apply same settings for each GPU by defining only one of the core and memory clock values, for example:
+You can also apply same settings for each GPU by defining only one core and memory clock value, for example:
 ```
 coreClocks=+200
 memClocks=+300
@@ -190,7 +190,24 @@ memClocks=+300
 
 ### powerLimits
 Optional common parameter.
-Can be used to set Nvidia cards power limits from -50 to 50. For example, -20 means 80% power limit, 10 means 110% power limit. The values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). You can also apply same settings for each GPU by defining only one of the power limit value.
+Can be used to set Nvidia cards power limits from -50 to 50. For example, -20 means 80% power limit, 10 means 110% power limit. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). You can also apply same settings for each GPU by defining only one power limit value.
+
+### memTweak
+Optional common parameter.
+Can be set to modify AMD GPU timings on the fly for Ethash algorithm. The following AMD ASICs are currently supported: gfx900, gfx901, gfx906, gfx907, Baffin, Ellesmere, gfx804, Hawaii, Tahiti, Pitcairn, Tonga.
+
+Miner must be launched using admin/root privileges in order to change timings.
+
+Default memory tweak value is 1 which means slightly improving memory timings. Zero value means timings are left as is without modifications. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). Supported memory tweak value range is from 0 to 10 (0 means disabling timings modification, 1 is the least intense, 10 is the most intense), for example:
+```
+memTweak=9,8,10
+```
+It is recommended to begin from lower values and increase them if the miner works stably.
+
+You can also apply same settings for each GPU by defining only one memory tweak value:
+```
+memTweak=10
+```
 
 ### noLog
 Optional common parameter.
