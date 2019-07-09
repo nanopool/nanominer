@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 1.4
+# version: 1.5
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -12,9 +12,7 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, CryptoNight (v6, v7, v8, CryptoNightR, Reverse Waltz), Cuckaroo29 and RandomHash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Graft, PascalCoin, GrinCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards with the following exceptions:
-* Cuckaroo29 algorithm is supported only on AMD cards with 8+ GB of memory.
-* The RandomHash algorithm is supported only on CPU.
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, CryptoNight (v6, v7, v8, CryptoNightR, Reverse Waltz), Cuckaroo29, Cuckarood29 and RandomHash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Graft, PascalCoin, GrinCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomHash algorithm which is supported only on CPU).
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 
@@ -32,7 +30,7 @@ For reporting bugs, technical support, feature requests and community discussion
 ## Dev fee
 Payment for the use of **nanominer** takes the form of a commission from mining to its wallets once per 2 hours of runtime. The commission is:
 - 1% of total mining time for Ethash, Ubqhash and CryptoNight algorithms (72 seconds per 2 hours);
-- 2% for Cuckaroo29 algorithm (144 seconds per 2 hours);
+- 2% for Cuckaroo29 and Cuckarood29 algorithms (144 seconds per 2 hours);
 - 3% for RandomHash on CPU (216 seconds per 2 hours).
 
 ## Setup
@@ -67,7 +65,7 @@ Another function on **nanominer** that improves the miner's automatic functionin
 More detailed information on using these functions can be found in the _Parameters_ section of this file.
 
 ## Parameters
-The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “Cuckaroo29”, “CryptoNightR”, “CryptoNightv8”, “CryptoNightv7”, “CryptoNightReverseWaltz”, “CryptoNight” or “RandomHash”. Configuration file must be in the following format:
+The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “Cuckaroo29”, “Cuckarood29”, “CryptoNightR”, “CryptoNightv8”, “CryptoNightv7”, “CryptoNightReverseWaltz”, “CryptoNight” or “RandomHash”. Configuration file must be in the following format:
 ```
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
@@ -466,7 +464,7 @@ pool1=pool.graft.hashvault.pro:5555
 **Nanopool uses UIDs for GrinCoin instead of wallets. To create an UID, visit [grin29.nanopool.org].**
 Example of a complete file for GrinCoin on nanopool:
 ```
-[Cuckaroo29]
+[Cuckaroo29] ; miner will auto detect algo for Grin
 wallet = mtfupx6jlmu8e17o
 rigName = rig1
 email = someemail@org
@@ -478,14 +476,14 @@ pool5 = grin29-asia1.nanopool.org:12111
 ```
 Example of an equivalent file for GrinCoin:
 ```
-[Cuckaroo29]
+[Cuckaroo29] ; miner will auto detect algo for Grin
 wallet = mtfupx6jlmu8e17o
 rigName = rig1
 email = someemail@org
 ```
 Example of a minimum file for GrinCoin:
 ```
-[Cuckaroo29]
+[Cuckaroo29] ; miner will auto detect algo for Grin
 wallet = mtfupx6jlmu8e17o
 ```
 Example of a complete file for PascalCoin:
