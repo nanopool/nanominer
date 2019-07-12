@@ -106,7 +106,7 @@ payment number in addition to their wallet.
 ### coin
 Optional algorithm parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of three values: ETH (or Ethereum), ETC (or Ethereum Classic), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), GRIN (or GrinCoin), PASC (or PascalCoin). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm (Ethereum or Monero). Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Monero or GrinCoin, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), GRIN (or GrinCoin), PASC (or PascalCoin). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm (Ethereum or Monero). Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Monero or GrinCoin, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -483,7 +483,7 @@ email = someemail@org
 ```
 Example of a minimum file for GrinCoin:
 ```
-[Cuckaroo29] ; miner will auto detect algo for Grin
+coin=grin
 wallet = mtfupx6jlmu8e17o
 ```
 Example of a complete file for PascalCoin:
