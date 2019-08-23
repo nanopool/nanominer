@@ -113,7 +113,10 @@ The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (
 If the pools are clearly defined with the aid of the _pool1, pool2, ..._, parameters, then **nanominer** will function according to the tasks it receives from those pools.
 ### rigName
 Optional algorithm parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
-This is the name of the rig (computer/worker). It will be displayed in the pool's statistics. If this parameter is not set, the program will generate a unique name and provide it to the pool.
+This is the name of the rig (computer/worker). It will be displayed in the pool's statistics. If this parameter is not set, the program will generate a unique name and provide it to the pool. To disable rigname completely just set it to empty string with
+```
+rigName=
+```
 ### email
 Optional algorithm parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
 This is the user’s e-mail address. It is provided to the pool where the rig will be operating. The pool can use it when sending out service notifications.
