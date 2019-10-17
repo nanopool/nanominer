@@ -123,7 +123,7 @@ Optional algorithm parameter. Can be specified in common parameter section inste
 This is the user’s e-mail address. It is provided to the pool where the rig will be operating. The pool can use it when sending out service notifications.
 ### pool1, pool2, ...
 Optional algorithm parameter.
-This defines the set of mining pools used. Values must be given in the format url:port (e.g. `pool1=eth-eu1.nanopool.org:9999`). The parameters should be defined in ascending, sequential order, from pool1 to poolN (for example: pool1, pool2, pool3). If the pool list is provided, the best pool will be chosen from the order of the pool list. If a `sortPools=true` option is specified, the best pool will be chosen by the connection speed. If the pool (or list of pools) is not defined, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) that correspond to the chosen cryptocurrency. For QuarkChain public full nodes are used if no pools are defined.
+This defines the set of mining pools used. Values must be given in the format url:port (e.g. `pool1=eth-eu1.nanopool.org:9999`). The parameters should be defined in ascending, sequential order, from pool1 to poolN (for example: pool1, pool2, pool3). If the pool list is provided, the best pool will be chosen from the order of the pool list. If a `sortPools=true` option is specified, the best pool will be chosen by the connection speed. If the pool (or list of pools) is not defined, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) that correspond to the chosen cryptocurrency. For QuarkChain public full nodes are used if no pools are defined. For Ubiq [Ubiqpool.io](https://ubiqpool.io) pools are used if no pools are defined.
 
 ### protocol
 Optional algorithm parameter.
@@ -413,15 +413,13 @@ wallet = 0xffffffffffffffffffffffffffffffffffffffff
 coin=Ubq
 rigName = rig1
 email = someemail@org
-pool1 = ubiq-eu.maxhash.org:8008
-pool2 = ubiq-us.maxhash.org:8008
-pool3 = ubiq-as.maxhash.org:8008
+pool1 = us.ubiqpool.io:8008
+pool2 = eu.ubiqpool.io:8008
 ```
 Example of a minimum file for Ubiq:
 ```
-[Ubqhash]
+coin=UBQ
 wallet=0xffffffffffffffffffffffffffffffffffffffff
-pool1 = ubiq-eu.maxhash.org:8008
 ```
 **During Monero hardfork nanominer will auto switch from CryptoNightR to RandomX on CPU (GPU mining will be stopped).**
 Example of a complete file for Monero:
@@ -546,7 +544,7 @@ wallet = mtfupx6jlmu8e17o
 devices = 5
 [Ubqhash]
 wallet = 0x1111111111111111111111111111111111111111
-pool1 = ubiq-eu.maxhash.org:8008
+pool1 = eu.ubiqpool.io:8008
 devices = 2,3,4,6,7
 [RandomHash]
 wallet=123456-77
