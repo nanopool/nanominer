@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 1.6
+# version: 1.7
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -12,13 +12,13 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, CryptoNight (v6, v7, v8, CryptoNightR, Reverse Waltz), Cuckaroo29, Cuckarood29, RandomX, RandomHash and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Graft, Pascal, GrinCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX, RandomHash and RandomHash2 algorithms which are supported only on CPU).
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, Cuckaroo29, Cuckarood29, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, GrinCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU).
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 
 In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
-Testing on **nanominer** demonstrated high performance working with Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Graft, Pascal, GrinCoin and other currencies. As a result of the research carried out, it was found that **nanominer** performs on par with, and sometimes better than, competing program products. Independently of this, **nanominer** stands out with its high stability and simple setup.
+Testing on **nanominer** demonstrated high performance working with Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, GrinCoin and other currencies. As a result of the research carried out, it was found that **nanominer** performs on par with, and sometimes better than, competing program products. Independently of this, **nanominer** stands out with its high stability and simple setup.
 
 ## Reporting bugs and technical support
 For reporting bugs, technical support, feature requests and community discussions feel free to use the following communication channels:
@@ -29,10 +29,10 @@ For reporting bugs, technical support, feature requests and community discussion
 
 ## Dev fee
 Payment for the use of **nanominer** takes the form of a commission from mining to its wallets once per 2 hours of runtime. The commission is:
-- 1% of total mining time for Ethash, Ubqhash and CryptoNight algorithms (72 seconds per 2 hours);
+- 1% of total mining time for Ethash and Ubqhash algorithms (72 seconds per 2 hours);
 - 2% for Cuckaroo29 and Cuckarood29 algorithms (144 seconds per 2 hours);
 - 2% for RandomX on CPU (144 seconds per 2 hours);
-- 5% for RandomHash & RandomHash2 on CPU (180 seconds every hour).
+- 5% for RandomHash2 on CPU (180 seconds every hour).
 
 ## Setup
 At launch **nanominer** reads the _config.ini_ setup file from the program's current directory. In order to
@@ -66,7 +66,7 @@ Another function on **nanominer** that improves the miner's automatic functionin
 More detailed information on using these functions can be found in the _Parameters_ section of this file.
 
 ## Parameters
-The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “Cuckaroo29”, “Cuckarood29”, “RandomX”, “CryptoNightR”, “CryptoNightv8”, “CryptoNightv7”, “CryptoNightReverseWaltz”, “CryptoNight”, “RandomHash” or “RandomHash2”. Configuration file must be in the following format:
+The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “Cuckaroo29”, “Cuckarood29”, “RandomX” or “RandomHash2”. Configuration file must be in the following format:
 ```
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
@@ -103,7 +103,7 @@ Mandatory parameter.
 This is the user's wallet, where funds will be deposited.
 ### paymentId
 Optional algorithm parameter, can be defined for wallets created on an exchange where the user has a personal
-payment number in addition to their wallet.
+payment number in addition to their wallet. Currently used only for Pascal.
 ### coin
 Optional algorithm parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
@@ -285,11 +285,11 @@ The best way to configure nanominer is using simple config file. For those who n
 
 Windows:
 ```
-cmdline_launcher -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomhash -wallet YOUR_PASC_WALLET -coin pasc -rigName YOUR_PASC_WORKER -email YOUR_EMAIL 
+cmdline_launcher -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomhash2 -wallet YOUR_PASC_WALLET -coin pasc -rigName YOUR_PASC_WORKER -email YOUR_EMAIL 
 ```
 Linux:
 ```
-./cmdline_launcher.sh -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomhash -wallet YOUR_PASC_WALLET -coin pasc -rigName YOUR_PASC_WORKER -email YOUR_EMAIL 
+./cmdline_launcher.sh -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomhash2 -wallet YOUR_PASC_WALLET -coin pasc -rigName YOUR_PASC_WORKER -email YOUR_EMAIL 
 ```
 
 ## Examples of Configuration Files
@@ -306,7 +306,7 @@ pool4 = eth-us-west1.nanopool.org:9999
 pool5 = eth-asia1.nanopool.org:9999
 pool6 = eth-jp1.nanopool.org:9999
 pool7 = eth-au1.nanopool.org:9999
-[RandomHash]
+[RandomHash2]
 wallet = 123456-77
 paymentId = ffffffffffffffff
 rigName = rig1
@@ -421,12 +421,10 @@ Example of a minimum file for Ubiq:
 coin=UBQ
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 ```
-**During Monero hardfork nanominer will auto switch from CryptoNightR to RandomX on CPU (GPU mining will be stopped).**
 Example of a complete file for Monero:
 ```
-[CryptoNightR]
+[RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-paymentId = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
 pool1 = xmr-eu1.nanopool.org:14433
@@ -437,40 +435,15 @@ pool5 = xmr-asia1.nanopool.org:14433
 ```
 Example of an equivalent file for Monero:
 ```
-[CryptoNightR]
+[RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-paymentId = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
 ```
 Example of a minimum file for Monero:
 ```
-[CryptoNightR]
+[RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-```
-Example of a complete file for Graft:
-```
-[CryptoNightReverseWaltz]
-wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-paymentId = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-rigName = rig1
-email = someemail@org
-pool1=pool.graft.hashvault.pro:5555 
-```
-Example of an equivalent file for Graft:
-```
-[CryptoNightReverseWaltz]
-wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-paymentId = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-rigName = rig1
-email = someemail@org
-pool1=pool.graft.hashvault.pro:5555
-```
-Example of a minimum file for Graft:
-```
-[CryptoNightReverseWaltz]
-wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-pool1=pool.graft.hashvault.pro:5555
 ```
 **Nanopool uses UIDs for GrinCoin instead of wallets. To create an UID, visit [grin29.nanopool.org].**
 Example of a complete file for GrinCoin on nanopool:
@@ -497,10 +470,9 @@ Example of a minimum file for GrinCoin:
 coin=grin
 wallet = mtfupx6jlmu8e17o
 ```
-**Pascal algo auto detection is supported only for Nanopool and solo mining. You must manually specify "RandomHash2" algo for other pools after hardfork.**
 Example of a complete file for Pascal:
 ```
-[RandomHash]
+[RandomHash2]
 wallet = 123456-77
 paymentId = ffffffffffffffff
 rigName = rig1
@@ -513,7 +485,7 @@ pool5 = pasc-asia1.nanopool.org:15556
 ```
 Example of an equivalent file for Pascal:
 ```
-[RandomHash]
+[RandomHash2]
 wallet = 123456-77
 paymentId = ffffffffffffffff
 rigName = rig1
@@ -521,12 +493,12 @@ email = someemail@org
 ```
 Example of a minimum file for Pascal:
 ```
-[RandomHash]
+[RandomHash2]
 wallet = 123456-77
 ```
 
 
-To mine Pascal in a solo mode please provide ip and port of Pascal Coin Wallet software. The wallet number filled in config does not matter in such case. Block payload would be "Miner Name" set up in Pascal Coin Wallet followed by nanominer version. Example of a file for solo mining Pascal using local wallet software:
+To mine Pascal in a solo mode please provide ip and port of Pascal full node Wallet software. The wallet number filled in config does not matter in such case. Block payload would be "Miner Name" set up in Pascal full node Wallet followed by nanominer version. Example of a file for solo mining Pascal using local wallet software:
 ```
 wallet = 0
 pool1 = 127.0.0.1:4009
@@ -546,6 +518,6 @@ devices = 5
 wallet = 0x1111111111111111111111111111111111111111
 pool1 = eu.ubiqpool.io:8008
 devices = 2,3,4,6,7
-[RandomHash]
+[RandomHash2]
 wallet=123456-77
 ```
