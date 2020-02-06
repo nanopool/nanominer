@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 1.7
+# version: 1.8
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -12,13 +12,13 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, Cuckaroo29, Cuckarood29, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, GrinCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU).
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, Cuckaroo30, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU.
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 
 In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
-Testing on **nanominer** demonstrated high performance working with Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, GrinCoin and other currencies. As a result of the research carried out, it was found that **nanominer** performs on par with, and sometimes better than, competing program products. Independently of this, **nanominer** stands out with its high stability and simple setup.
+Testing on **nanominer** demonstrated high performance working with Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex and other currencies. As a result of the research carried out, it was found that **nanominer** performs on par with, and sometimes better than, competing program products. Independently of this, **nanominer** stands out with its high stability and simple setup.
 
 ## Reporting bugs and technical support
 For reporting bugs, technical support, feature requests and community discussions feel free to use the following communication channels:
@@ -30,9 +30,9 @@ For reporting bugs, technical support, feature requests and community discussion
 ## Dev fee
 Payment for the use of **nanominer** takes the form of a commission from mining to its wallets once per 2 hours of runtime. The commission is:
 - 1% of total mining time for Ethash and Ubqhash algorithms (72 seconds per 2 hours);
-- 2% for Cuckaroo29 and Cuckarood29 algorithms (144 seconds per 2 hours);
 - 2% for RandomX on CPU (144 seconds per 2 hours);
 - 5% for RandomHash2 on CPU (180 seconds every hour).
+- 5% for Cuckaroo30 algorithm (360 seconds per 2 hours);
 
 ## Setup
 At launch **nanominer** reads the _config.ini_ setup file from the program's current directory. In order to
@@ -43,7 +43,7 @@ nanominer.exe config_etc.ini
 ```
 When launching with the _-d_ command line option (e.g. `nanominer.exe -d`) the miner displays a list of the devices it detects, including their PCI addresses and their amount of memory. In order to use this function on Windows the program must be launched from the command prompt (cmd).
 
-**nanominer** does not require any pools to be specified in the config file. If a pool (or list of pools) is not specified, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) corresponding to the chosen cryptocurrency (except for Ubiq and QuarkChain). QuarkChain public full nodes (fullnode.quarkchain.io and fullnode2.quarkchain.io) which are maintained by QuarkChain developers are used by default.
+**nanominer** does not require any pools to be specified in the config file. If a pool (or list of pools) is not specified, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) corresponding to the chosen cryptocurrency (except for coins not listed on Nanopool). QuarkChain public full nodes (fullnode.quarkchain.io and fullnode2.quarkchain.io) which are maintained by QuarkChain developers are used by default for QuarkChain.
 
 When **nanominer** starts up it displays the main work information in the console log, including the program’s current version, the name of the rig, the number and type of graphics cards installed and the program’s current settings.
 ## Log Files
@@ -66,7 +66,7 @@ Another function on **nanominer** that improves the miner's automatic functionin
 More detailed information on using these functions can be found in the _Parameters_ section of this file.
 
 ## Parameters
-The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “Cuckaroo29”, “Cuckarood29”, “RandomX” or “RandomHash2”. Configuration file must be in the following format:
+The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “Cuckaroo30”, “RandomX” or “RandomHash2”. Configuration file must be in the following format:
 ```
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
@@ -107,7 +107,7 @@ payment number in addition to their wallet. Currently used only for Pascal.
 ### coin
 Optional algorithm parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), GRIN (or GrinCoin), PASC (or Pascal). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm (Ethereum or Monero). Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Monero or GrinCoin, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), PASC (or Pascal). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic or Monero, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -134,7 +134,7 @@ Optional algorithm parameter.
 The password for the rig (or worker). It may be necessary when working with pools that require registration and setting a rig password.
 ### watchdog
 Optional common parameter.
-This parameter manages the miner's restart function when running into critical GPU errors or lag. It accepts the values _true_ or _false_. By default, _true_ – automatic restart - is activated.
+This parameter manages the miner's restart function when running into critical GPU errors or lag. It accepts the values _true_ or _false_. By default, _true_ – automatic restart – is activated.
 ### minHashrate
 Optional algorithm parameter.
 This is the minimum acceptable hashrate. This function keeps track of the rig's total hashrate and compares it with this parameter. If five minutes after the miner is launched the set minimum is not reached, **nanominer** will automatically restart. Likewise, the miner will restart if for any reason the average hashrate over a ten-minute period falls below the set value. This value can be set with an optional modifier letter that represents a thousand for kilohash or a million for megahash per second. For example, setting the value to 100 megahashes per second can be written as 100M, 100.0M, 100m, 100000k, 100000K or 100000000. If this parameter is not defined, the miner will not restart (with the exception of the situations described in the _watchdog_ section).
@@ -445,30 +445,16 @@ Example of a minimum file for Monero:
 [RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ```
-**Nanopool uses UIDs for GrinCoin instead of wallets. To create an UID, visit [grin29.nanopool.org].**
-Example of a complete file for GrinCoin on nanopool:
+
+Example of a complete file for Cortex:
 ```
-[Cuckarood29]
-wallet = mtfupx6jlmu8e17o
+[Cuckaroo30]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
-email = someemail@org
-pool1 = grin29-eu1.nanopool.org:12111
-pool2 = grin29-eu2.nanopool.org:12111
-pool3 = grin29-us-east1.nanopool.org:12111
-pool4 = grin29-us-west1.nanopool.org:12111
-pool5 = grin29-asia1.nanopool.org:12111
-```
-Example of an equivalent file for GrinCoin:
-```
-[Cuckarood29]
-wallet = mtfupx6jlmu8e17o
-rigName = rig1
-email = someemail@org
-```
-Example of a minimum file for GrinCoin:
-```
-coin=grin
-wallet = mtfupx6jlmu8e17o
+pool1=eu.frostypool.com:8008
+pool2=us.frostypool.com:8008
+pool3=asia.frostypool.com:8008
+sortPools=true
 ```
 Example of a complete file for Pascal:
 ```
@@ -504,16 +490,17 @@ wallet = 0
 pool1 = 127.0.0.1:4009
 ```
 
-Example of configuration file for mining Ethereum, Grin, Ubiq and Pascal on same 8 GPUs rig using separate devices:
+Example of configuration file for mining Ethereum, Cortex, Ubiq and Pascal on same 8 GPUs rig using separate devices:
 
 ```
 rigName = rig1
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 devices = 0,1
-[Cuckarood29]
-wallet = mtfupx6jlmu8e17o
+[Cuckaroo30]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff
 devices = 5
+pool1=eu.frostypool.com:8008
 [Ubqhash]
 wallet = 0x1111111111111111111111111111111111111111
 pool1 = eu.ubiqpool.io:8008
