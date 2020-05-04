@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 1.8
+# version: 1.9
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -12,7 +12,7 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Ubqhash, Cuckaroo30, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU.
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, KawPow, Ubqhash, Cuckaroo30, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex, Raven and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Raven's KawPow algorithm is only supported on AMD GPUs, Nvidia support to follow.
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 
@@ -30,6 +30,7 @@ For reporting bugs, technical support, feature requests and community discussion
 ## Dev fee
 Payment for the use of **nanominer** takes the form of a commission from mining to its wallets once per 2 hours of runtime. The commission is:
 - 1% of total mining time for Ethash and Ubqhash algorithms (72 seconds per 2 hours);
+- 2% for KawPow on GPU (144 seconds per 2 hours);
 - 2% for RandomX on CPU (144 seconds per 2 hours);
 - 5% for RandomHash2 on CPU (180 seconds every hour).
 - 5% for Cuckaroo30 algorithm (360 seconds per 2 hours);
@@ -210,6 +211,10 @@ You can also apply same settings for each GPU by defining only one memory tweak 
 ```
 memTweak=10
 ```
+
+### epoch
+Optional algorithm parameter.
+Ethash algorithm specific option to check miner behaviour on different Ethash epochs.
 
 ### noLog
 Optional common parameter.
@@ -488,6 +493,27 @@ To mine Pascal in a solo mode please provide ip and port of Pascal full node Wal
 ```
 wallet = 0
 pool1 = 127.0.0.1:4009
+```
+
+Example of a configuration file for Raven:
+```
+[Kawpow]
+wallet = Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+coin=Rvn
+rigName = rig1
+email = someemail@org
+pool1 = rvn-eu1.nanopool.org:12433
+pool2 = rvn-eu2.nanopool.org:12433
+pool3 = rvn-us-east1.nanopool.org:12433
+pool4 = rvn-us-west1.nanopool.org:12433
+pool5 = rvn-asia1.nanopool.org:12433
+pool6 = rvn-jp1.nanopool.org:12433
+pool7 = rvn-au1.nanopool.org:12433
+
+```
+Example of a minimum file for Raven:
+```
+wallet=Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 ```
 
 Example of configuration file for mining Ethereum, Cortex, Ubiq and Pascal on same 8 GPUs rig using separate devices:
