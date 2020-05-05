@@ -12,7 +12,7 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, KawPow, Ubqhash, Cuckaroo30, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex, Raven and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Raven's KawPow algorithm is only supported on AMD GPUs, Nvidia support to follow.
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, KawPow, Ubqhash, Cuckaroo30, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex, Ravencoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Ravencoin's KawPow algorithm is only supported on AMD GPUs, Nvidia support to follow.
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 
@@ -67,7 +67,7 @@ Another function on **nanominer** that improves the miner's automatic functionin
 More detailed information on using these functions can be found in the _Parameters_ section of this file.
 
 ## Parameters
-The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Ubqhash”, “Cuckaroo30”, “RandomX” or “RandomHash2”. Configuration file must be in the following format:
+The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “KawPow”, “Ubqhash”, “Cuckaroo30”, “RandomX” or “RandomHash2”. Configuration file must be in the following format:
 ```
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
@@ -108,7 +108,7 @@ payment number in addition to their wallet. Currently used only for Pascal.
 ### coin
 Optional algorithm parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), PASC (or Pascal). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic or Monero, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), PASC (or Pascal). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic or Monero, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -495,7 +495,7 @@ wallet = 0
 pool1 = 127.0.0.1:4009
 ```
 
-Example of a configuration file for Raven:
+Example of a configuration file for Ravencoin:
 ```
 [Kawpow]
 wallet = Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
@@ -511,7 +511,7 @@ pool6 = rvn-jp1.nanopool.org:12433
 pool7 = rvn-au1.nanopool.org:12433
 
 ```
-Example of a minimum file for Raven:
+Example of a minimum file for Ravencoin:
 ```
 wallet=Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 ```
