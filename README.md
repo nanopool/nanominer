@@ -249,6 +249,10 @@ Default value: -3333 (This means that the miner blocks management through API an
 Optional common parameter.
 Your password for monitoring with EthMan and other utilities that support the same network API.
 
+### useSSL
+Optional common parameter.
+This parameter accepts the values _true_ or _false_ (the default is _true_). If this parameter is set to _true_ then miner always tries to use SSL pool connection first and fallbacks to unencrypted connection if SSL connection failed. If this parameter is set to _false_ then miner doesn't try using SSL for pool connection.
+
 ### shardId
 Optional algorithm parameter.
 Can be used to set a shard ID for QuarkChain solo mining. This parameter should be specified in hex, e.g. 0x1, 0x10001, 0x10002, 0x50001, etc. For root chain shard ID `null` must be specified. For more information on shards, visit [this](https://github.com/QuarkChain/pyquarkchain/wiki/Address,-Shard-Key,-Chain-Id,-Shard-Id) and [this](https://github.com/quarkChain/pyquarkchain/releases/latest) link. Default shard ID is 0x1. Shard ID is passed to QuarkChain node "as is" so all current and future Ethash shards are supported.
