@@ -68,11 +68,10 @@ More detailed information on using these functions can be found in the _Paramete
 
 ## Parameters
 The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “KawPow”, “Ubqhash”, “Cuckaroo30”, “RandomX” or “RandomHash2”. Configuration file must be in the following format:
-```
+```ini
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
 commonparameterX=commonvalueX
-...
 
 [AlgoName1]
 devices=0,1
@@ -80,7 +79,6 @@ wallet = wallet1
 algoparameter1=algovalue1_1
 algoparameter2=algovalue1_2
 algoparameterY=algovalue1_Y
-...
 
 [AlgoName2]
 devices=2,3
@@ -92,7 +90,6 @@ algoparameterZ=algovalue2_Z
 [AlgoName3]
 devices=4,5
 wallet = wallet3
-...
 ```
 More config examples can be found below.
 
@@ -116,7 +113,7 @@ If the pools are clearly defined with the aid of the _pool1, pool2, ..._, parame
 ### rigName
 Optional algorithm parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
 This is the name of the rig (computer/worker). It will be displayed in the pool's statistics. If this parameter is not set, the program will generate a unique name and provide it to the pool. To disable rigname completely just set it to empty string with
-```
+```ini
 rigName=
 ```
 ### email
@@ -146,11 +143,11 @@ These are the graphics cards that will be used by the miner. If you do not want 
 nanominer -d
 ```
 For example, if there are four GPUs in the system (0, 1, 2, 3) and all but the second-to-last one (indexed as 2) must be set to mine, then the devices option must be set in the following manner:
-```
+```ini
 devices=0,1,3
 ```
 The order of devices determines the order of displayed hashrate. For example, if it is set as
-```
+```ini
 devices=3,1,0
 ``` 
 then the hashrate line will first display GPU3, then GPU1 and finally GPU0.
@@ -180,13 +177,13 @@ To run reboot script instead of restarting miner every time a critical error occ
 ### coreClocks, memClocks
 Optional common parameters.
 Can be used to overclock/underclock NVIDIA GPU's. Absolute (e.g. 4200) as well as relative (e.g. +200, -150) values in MHz are accepted. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). For example, if it is set as
-```
+```ini
 coreClocks=+200,-150
 memClocks=+300,3900
 ```
 then GPU0 will be overclocked by 200 MHz of core and 300 MHz of memory, whereas GPU1 core clock will be underclocked by 150 MHz, and its memory clock set to 3900 MHz.
 You can also apply same settings for each GPU by defining only one core and memory clock value, for example:
-```
+```ini
 coreClocks=+200
 memClocks=+300
 ```
@@ -202,13 +199,13 @@ Can be set to modify AMD GPU timings on the fly for Ethash algorithm. The follow
 Miner must be launched using admin/root privileges in order to change timings.
 
 Default memory tweak value is 1 which means slightly improving memory timings. Zero value means timings are left as is without modifications. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). Supported memory tweak value range is from 0 to 10 (0 means disabling timings modification, 1 is the least intense, 10 is the most intense), for example:
-```
+```ini
 memTweak=9,8,10
 ```
 It is recommended to begin from lower values and increase them if the miner works stably.
 
 You can also apply same settings for each GPU by defining only one memory tweak value:
-```
+```ini
 memTweak=10
 ```
 
@@ -274,13 +271,13 @@ Optional algorithm parameter for Ethash and Ubqhash algorithms. This parameter a
 
 ## Configuration File
 The minimum configuration file for Ethereum may contain only a wallet:
-```
+```ini
 wallet=<wallet>
 ```
 **nanominer** will automatically use Ethereum pools.
 
 To work with Ethereum Classic, the coin must be specified:
-```
+```ini
 wallet=<wallet>
 coin=ETC
 ```
@@ -303,7 +300,7 @@ Linux:
 
 ## Examples of Configuration Files
 Example of a configuration file for Ethereum and Pascal:
-```
+```ini
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
@@ -327,7 +324,7 @@ pool4 = pasc-us-west1.nanopool.org:15556
 pool5 = pasc-asia1.nanopool.org:15556
 ```
 Example of a configuration file for Ethereum:
-```
+```ini
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
@@ -341,19 +338,19 @@ pool6 = eth-jp1.nanopool.org:9999
 pool7 = eth-au1.nanopool.org:9999
 ```
 Example of an equivalent file for Ethereum:
-```
+```ini
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
 ```
 Example of a minimum file for Ethereum:
-```
+```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 ```
 Example of a configuration file for Ethereum Classic:
-```
+```ini
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 coin=Etc
@@ -368,7 +365,7 @@ pool6 = etc-jp1.nanopool.org:19999
 pool7 = etc-au1.nanopool.org:19999
 ```
 Example of an equivalent file for Ethereum Classic:
-```
+```ini
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 coin=Etc
@@ -376,13 +373,13 @@ rigName = rig1
 email = someemail@org
 ```
 Example of a minimum file for Ethereum Classic:
-```
+```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 coin=Etc
 ```
 Example of a complete configuration file for solo QuarkChain mining:
-```
+```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 shardId=0x30001
@@ -392,7 +389,7 @@ pool1=localhost:38391
 protocol=getwork
 ```
 Example of a minimum file for solo QuarkChain mining:
-```
+```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 coin=Qkc
@@ -400,7 +397,7 @@ pool1=localhost:38391
 shardId=0x50001
 ```
 Example of a file for solo QuarkChain mining on root shard:
-```
+```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 coin=Qkc
@@ -408,7 +405,7 @@ pool1=localhost:38391
 shardId=null
 ```
 Example of a minimum file for QuarkChain mining using public nodes:
-```
+```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 coin=Qkc
@@ -416,7 +413,7 @@ shardId=0x30001
 ```
 
 Example of a configuration file for Ubiq:
-```
+```ini
 [Ubqhash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 coin=Ubq
@@ -426,12 +423,12 @@ pool1 = us.ubiqpool.io:8008
 pool2 = eu.ubiqpool.io:8008
 ```
 Example of a minimum file for Ubiq:
-```
+```ini
 coin=UBQ
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 ```
 Example of a complete file for Monero:
-```
+```ini
 [RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
@@ -443,20 +440,20 @@ pool4 = xmr-us-west1.nanopool.org:14433
 pool5 = xmr-asia1.nanopool.org:14433
 ```
 Example of an equivalent file for Monero:
-```
+```ini
 [RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
 ```
 Example of a minimum file for Monero:
-```
+```ini
 [RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ```
 
 Example of a complete file for Cortex:
-```
+```ini
 [Cuckaroo30]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
@@ -466,7 +463,7 @@ pool3=asia.frostypool.com:8008
 sortPools=true
 ```
 Example of a complete file for Pascal:
-```
+```ini
 [RandomHash2]
 wallet = 123456-77
 paymentId = ffffffffffffffff
@@ -479,7 +476,7 @@ pool4 = pasc-us-west1.nanopool.org:15556
 pool5 = pasc-asia1.nanopool.org:15556
 ```
 Example of an equivalent file for Pascal:
-```
+```ini
 [RandomHash2]
 wallet = 123456-77
 paymentId = ffffffffffffffff
@@ -487,20 +484,20 @@ rigName = rig1
 email = someemail@org
 ```
 Example of a minimum file for Pascal:
-```
+```ini
 [RandomHash2]
 wallet = 123456-77
 ```
 
 
 To mine Pascal in a solo mode please provide ip and port of Pascal full node Wallet software. The wallet number filled in config does not matter in such case. Block payload would be "Miner Name" set up in Pascal full node Wallet followed by nanominer version. Example of a file for solo mining Pascal using local wallet software:
-```
+```ini
 wallet = 0
 pool1 = 127.0.0.1:4009
 ```
 
 Example of a configuration file for Ravencoin:
-```
+```ini
 [Kawpow]
 wallet = Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 coin=Rvn
@@ -516,13 +513,13 @@ pool7 = rvn-au1.nanopool.org:12433
 
 ```
 Example of a minimum file for Ravencoin:
-```
+```ini
 wallet=Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 ```
 
 Example of configuration file for mining Ethereum, Cortex, Ubiq and Pascal on same 8 GPUs rig using separate devices:
 
-```
+```ini
 rigName = rig1
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
