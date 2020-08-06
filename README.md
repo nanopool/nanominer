@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 1.9
+# version: 1.10
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -12,13 +12,13 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, KawPow, Ubqhash, Cuckaroo30, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex, Ravencoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Ravencoin's KawPow algorithm is only supported on AMD GPUs, Nvidia support to follow.
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, KawPow, Ubqhash, Cuckaroo30, RandomX and RandomHash2 algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ravencoin, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and RandomHash2 algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU.
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 
 In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
-Testing on **nanominer** demonstrated high performance working with Ethereum, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex and other currencies. As a result of the research carried out, it was found that **nanominer** performs on par with, and sometimes better than, competing program products. Independently of this, **nanominer** stands out with its high stability and simple setup.
+Testing on **nanominer** demonstrated high performance working with Ethereum, Ravencoin, Ethereum Classic, QuarkChain, Ubiq, Monero, Pascal, Cortex and other currencies. Ethash and KawPow implementations have some know-how optimizations for DAG size in memory which is critical for 3 GB and 4 GB GPUs. Independently of this, **nanominer** stands out with its high stability and simple setup.
 
 ## Reporting bugs and technical support
 For reporting bugs, technical support, feature requests and community discussions feel free to use the following communication channels:
