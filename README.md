@@ -14,7 +14,7 @@
 
 **nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Etchash, KawPow, Octopus, Ubqhash, Cuckaroo30 and RandomX algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX algorithm which is supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Octopus algorithm is only supported on Nvidia GPUs for now.
 
-In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
+In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**. Nvidia 30xx series of GPUs is not yet supported.
 
 In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
