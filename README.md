@@ -270,6 +270,10 @@ This parameter accepts the values _true_ or _false_ (the default is _false_ for 
 ### sendHashrate
 Optional algorithm parameter for Ethash, Etchash and Ubqhash algorithms. This parameter accepts the values _true_ or _false_. The default value is _true_ (if JSON-RPC pool protocol is used).
 
+### dagSer
+Optional algorithm parameter for Ethash, Etchash and KawPow algorithms.
+This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the DAG will be generated sequentionaly on each GPU. Otherwise all the GPUs generate DAG at the same time.
+
 ## Configuration File
 The minimum configuration file for Ethereum may contain only a wallet:
 ```ini
@@ -484,14 +488,32 @@ Example of a minimum file for Ravencoin:
 wallet=Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 ```
 
-Example of a configuration file for Conflux:
+Example of a complete file for Conflux:
 ```ini
-wallet = 0x1bebf6e224586a4ce22e50faee656176ad155bb9
-coin = CFX
+[Octopus]
+wallet = 0x1fffffffffffffffffffffffffffffffffffffff
 rigName = rig1
-pool1 = cfx.666pool.cn:6655
-pool2 = cfx.f2pool.com:6800
+email = someemail@org
+pool1=cfx-eu1.nanopool.org:17433
+pool2=cfx-eu2.nanopool.org:17433
+pool3=cfx-us-east1.nanopool.org:17433
+pool4=cfx-us-west1.nanopool.org:17433
+pool5=cfx-asia1.nanopool.org:17433
+pool6=cfx-jp1.nanopool.org:17433
+pool7=cfx-au1.nanopool.org:17433
+```
 
+Example of an equivalent file for Conflux:
+```ini
+[Octopus]
+wallet = 0x1fffffffffffffffffffffffffffffffffffffff
+rigName = rig1
+email = someemail@org
+```
+Example of a minimum file for Conflux:
+```ini
+wallet = 0x1fffffffffffffffffffffffffffffffffffffff
+coin = CFX
 ```
 
 Example of configuration file for mining Ethereum, Cortex, Ubiq and Monero on same 8 GPUs rig using separate devices:
