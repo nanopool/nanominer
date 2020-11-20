@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.0
+# version: 3.1
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -12,7 +12,7 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Etchash, KawPow, Octopus, Ubqhash, Cuckaroo30 and RandomX algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX algorithm which is supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Octopus algorithm is only supported on Nvidia GPUs for now.
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Etchash, KawPow, Octopus, Ubqhash, Cuckaroo30, RandomX and Verushash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex, VerusCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and Verushash algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Octopus algorithm is only supported on Nvidia GPUs for now.
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 **nanominer cuda11** version needs Nvidia driver **455.23 and newer on Linux** or **456.38 and newer on Windows**.
@@ -32,7 +32,7 @@ For reporting bugs, technical support, feature requests and community discussion
 ## Dev fee
 **nanominer** takes payment in the form of mining to its wallets once per 2 hours of runtime. The commission is:
 - 1% of total mining time for Ethash, Etchash and Ubqhash algorithms (72 seconds per 2 hours);
-- 2% for KawPow, Octopus and RandomX algorithms (144 seconds per 2 hours);
+- 2% for KawPow, Octopus, RandomX and Verushash algorithms (144 seconds per 2 hours);
 - 5% for Cuckaroo30 algorithm (360 seconds per 2 hours);
 
 ## Setup
@@ -102,7 +102,7 @@ This is the user's wallet, where funds will be deposited.
 ### coin
 Optional algorithm parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic or Monero, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic or Monero, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -514,6 +514,24 @@ Example of a minimum file for Conflux:
 ```ini
 wallet = 0x1fffffffffffffffffffffffffffffffffffffff
 coin = CFX
+```
+
+Example of a complete file for VerusCoin:
+```ini
+[Verushash]
+wallet = REoPcdGXthL5yeTCrJtrQv5xhYTknbFbec
+coin = VRSC
+rigName = speed_test
+rigPassword=d=4
+cpuThreads=4
+pool1 = na.luckpool.net:3956
+```
+
+Example of a minimum file for VerusCoin:
+```ini
+coin = VRSC
+wallet = REoPcdGXthL5yeTCrJtrQv5xhYTknbFbec
+pool1 = na.luckpool.net:3956
 ```
 
 Example of configuration file for mining Ethereum, Cortex, Ubiq and Monero on same 8 GPUs rig using separate devices:
