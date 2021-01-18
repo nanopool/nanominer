@@ -27,7 +27,7 @@ For reporting bugs, technical support, feature requests and community discussion
 * Support email: support@nanominer.org
 * GitHub issues tracker: https://github.com/nanopool/nanominer/issues
 * Community chat in telegram (developers read it too): https://t.me/nanominer_en
-* Our Discord channel https://discord.gg/eyWkqG3
+* Our Discord channel https://discord.gg/JtKHCbm8Yg
 
 ## Dev fee
 **nanominer** takes payment in the form of mining to its wallets once per 2 hours of runtime. The commission is:
