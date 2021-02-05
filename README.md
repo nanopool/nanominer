@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.1
+# version: 3.2
 # Table of Contents
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
 1. [Dev fee](#dev-fee)
@@ -12,7 +12,7 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Etchash, KawPow, Octopus, Ubqhash, Cuckaroo30, RandomX and Verushash algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex, VerusCoin and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and Verushash algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Octopus algorithm is only supported on Nvidia GPUs for now.
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Etchash, KawPow, Octopus, Ubqhash, Cuckaroo30, RandomX, Verushash and Autolykos algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex, VerusCoin, Ergo and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and Verushash algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Octopus algorithm is only supported on Nvidia GPUs for now.
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 **nanominer cuda11** version needs Nvidia driver **455.23 and newer on Linux** or **456.38 and newer on Windows**.
@@ -20,7 +20,7 @@ Nvidia 30xx series of GPUs will only work with `cuda11` version of miner.
 
 In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
-Testing on **nanominer** demonstrated high performance working with Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex and other currencies. Ethash, Etchash and KawPow implementations have some know-how optimizations for DAG size in memory which is critical for 3 GB and 4 GB GPUs. Independently of this, **nanominer** stands out with its high stability and simple setup.
+Testing on **nanominer** demonstrated high performance working with Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex, Ergo and other currencies. Ethash, Etchash and KawPow implementations have some know-how optimizations for DAG size in memory which is critical for 3 GB and 4 GB GPUs. Independently of this, **nanominer** stands out with its high stability and simple setup.
 
 ## Reporting bugs and technical support
 For reporting bugs, technical support, feature requests and community discussions feel free to use the following communication channels:
@@ -33,7 +33,7 @@ For reporting bugs, technical support, feature requests and community discussion
 **nanominer** takes payment in the form of mining to its wallets once per 2 hours of runtime. The commission is:
 - 1% of total mining time for Ethash, Etchash and Ubqhash algorithms (72 seconds per 2 hours);
 - 2% for KawPow, Octopus, RandomX and Verushash algorithms (144 seconds per 2 hours);
-- 5% for Cuckaroo30 algorithm (360 seconds per 2 hours);
+- 5% for Cuckaroo30 and Autolykos algorithms (360 seconds per 2 hours);
 
 ## Setup
 At launch **nanominer** reads the _config.ini_ setup file from the program's current directory. In order to
@@ -67,7 +67,7 @@ Another function on **nanominer** that improves the miner's automatic functionin
 More detailed information on using these functions can be found in the _Parameters_ section of this file.
 
 ## Parameters
-The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Etchash”, “KawPow”, “Octopus”, “Ubqhash”, “Cuckaroo30” or “RandomX”. Configuration file must be in the following format:
+The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Etchash”, “KawPow”, “Octopus”, “Ubqhash”, “Cuckaroo30”, “RandomX”, “Verushash” or “Autolykos”. Configuration file must be in the following format:
 ```ini
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
@@ -102,7 +102,7 @@ This is the user's wallet, where funds will be deposited.
 ### coin
 Optional algorithm parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic or Monero, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus), ERG (or Ergo). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -532,6 +532,34 @@ Example of a minimum file for VerusCoin:
 coin = VRSC
 wallet = REoPcdGXthL5yeTCrJtrQv5xhYTknbFbec
 pool1 = na.luckpool.net:3956
+```
+
+Example of a complete file for Ergo:
+```ini
+[autolykos]
+wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
+rigName = rig1
+email = someemail@org
+pool1 = ergo-eu1.nanopool.org:11433
+pool2 = ergo-us-east1.nanopool.org:11433
+pool3 = ergo-us-west1.nanopool.org:11433
+pool4 = ergo-eu2.nanopool.org:11433
+pool5 = ergo-asia1.nanopool.org:11433
+pool6 = ergo-jp1.nanopool.org:11433
+pool7 = ergo-au1.nanopool.org:11433
+
+```
+Example of an equivalent file for Ergo:
+```ini
+[autolykos]
+wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
+rigName = rig1
+email = someemail@org
+```
+Example of a minimum file for Ergo:
+```ini
+coin=ergo
+wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
 ```
 
 Example of configuration file for mining Ethereum, Cortex, Ubiq and Monero on same 8 GPUs rig using separate devices:
