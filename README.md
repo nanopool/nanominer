@@ -1,8 +1,8 @@
 # nanominer by nanopool
-# version: 3.2
+# version: 3.3
 # Table of Contents
+1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
-1. [Dev fee](#dev-fee)
 1. [Setup](#setup)
 1. [Log Files](#log-files)
 1. [Remote Monitoring](#remote-monitoring)
@@ -12,7 +12,29 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**nanominer** is a program product developed by nanopool to create structural cryptocurrency units on the framework of the Ethash, Etchash, KawPow, Octopus, Ubqhash, Cuckaroo30, RandomX, Verushash and Autolykos algorithms. The present version of **nanominer** was made to work with every cryptocurrency based on these algorithms, including Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex, VerusCoin, Ergo and many others. This version of **nanominer** runs on Windows or Linux with AMD or Nvidia graphics cards (with the exception of RandomX and Verushash algorithms which are supported only on CPU). Cuckaroo30 algorithm is only supported on AMD Radeon RX 570 16 GB GPU. Octopus algorithm is only supported on Nvidia GPUs for now.
+**nanominer** is a program product developed by nanopool to create structural cryptocurrency units based on the following algorithms:
+
+|     Algo      |     Coin      | Dev Fee (once per 2 hours)  |     AMD     |    Nvidia   |   CPU   |
+|:-------------:|:-------------:|:---------------------------:|:-----------:|:-----------:|:-------:|
+|  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |         |
+|  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |         |
+|  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |         |
+|  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |         |
+|  Octopus      |      CFX      |             2%              |             |   &check;   |         |
+|  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |         |
+|  RandomX      |      XMR      |             2%              |             |             | &check; |
+|  Verushash    |      VRSC     |             2%              |             |             | &check; |
+
+**nanominer** also supports Zilliqa mining is the current configurations (see config examples):
+| Configuration |  Merged (same pool) | Split (different pools) |
+|:-------------:|:-------------------:|:-----------------------:|
+|    ETH+ZIL    |        &check;      |          &check;        |
+|    ETC+ZIL    |        &check;      |          &check;        |
+|    CFX+ZIL    |                     |          &check;        |
+|    ERG+ZIL    |                     |          &check;        |
+When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0xffffffffffffffffffffffffffffffffffffffff` ETH/ETC address to authorize on Zilliqa pool.
+
+## Driver requirements
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 **nanominer cuda11** version needs Nvidia driver **455.23 and newer on Linux** or **456.38 and newer on Windows**.
@@ -28,12 +50,6 @@ For reporting bugs, technical support, feature requests and community discussion
 * GitHub issues tracker: https://github.com/nanopool/nanominer/issues
 * Community chat in telegram (developers read it too): https://t.me/nanominer_en
 * Our Discord channel https://discord.gg/JtKHCbm8Yg
-
-## Dev fee
-**nanominer** takes payment in the form of mining to its wallets once per 2 hours of runtime. The commission is:
-- 1% of total mining time for Ethash, Etchash and Ubqhash algorithms (72 seconds per 2 hours);
-- 2% for KawPow, Octopus, RandomX and Verushash algorithms (144 seconds per 2 hours);
-- 5% for Cuckaroo30 and Autolykos algorithms (360 seconds per 2 hours);
 
 ## Setup
 At launch **nanominer** reads the _config.ini_ setup file from the program's current directory. In order to
@@ -67,7 +83,7 @@ Another function on **nanominer** that improves the miner's automatic functionin
 More detailed information on using these functions can be found in the _Parameters_ section of this file.
 
 ## Parameters
-The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Etchash”, “KawPow”, “Octopus”, “Ubqhash”, “Cuckaroo30”, “RandomX”, “Verushash” or “Autolykos”. Configuration file must be in the following format:
+The settings for **nanominer** can be found in the configuration file with the *.ini extension (_config.ini_ by default). Config file can contain common params and algorithm params (in sections with corresponding algorithm names). Section names can be defined as “Ethash”, “Etchash”, “KawPow”, “Octopus”, “Ubqhash”, “RandomX”, “Verushash”, “Autolykos” or “Zilliqa”. Configuration file must be in the following format:
 ```ini
 commonparameter1=commonvalue1
 commonparameter2=commonvalue2
@@ -102,7 +118,7 @@ This is the user's wallet, where funds will be deposited.
 ### coin
 Optional algorithm parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus), ERG (or Ergo). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus), ERG (or Ergo), ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -210,6 +226,10 @@ memTweak=10
 Optional algorithm parameter.
 Ethash algorithm specific option to check miner behaviour on different Ethash epochs.
 
+### zilEpoch
+Optional algorithm parameter.
+Sets the epoch of Zilliqa DAG to store in GPU memory (default is 0).
+
 ### noLog
 Optional common parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then no log files will be recorded onto the hard drive.
@@ -304,6 +324,26 @@ Linux:
 ```
 
 ## Examples of Configuration Files
+Example of a configuration file for split Ethereum and Zilliqa:
+```ini
+[Ethash]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff
+; nanopool by default
+[Zilliqa]
+wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+pool1 = eu.ezil.me:5555
+pool2 = us-west.ezil.me:5555
+pool3 = asia.ezil.me:5555
+```
+Example of a configuration file for merged Ethereum and Zilliqa:
+```ini
+[Ethash]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff.zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+zilEpoch = 0
+pool1 = eu.ezil.me:5555
+pool2 = us-west.ezil.me:5555
+pool3 = asia.ezil.me:5555
+```
 Example of a configuration file for Ethereum and Monero:
 ```ini
 [Ethash]
@@ -352,6 +392,26 @@ Example of a minimum file for Ethereum:
 ```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
+```
+Example of a configuration file for split Ethereum Classic and Zilliqa:
+```ini
+[Etchash]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff
+; nanopool by default
+[Zilliqa]
+wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+pool1 = eu.ezil.me:5555
+pool2 = us-west.ezil.me:5555
+pool3 = asia.ezil.me:5555
+```
+Example of a configuration file for merged Ethereum Classic and Zilliqa:
+```ini
+[Etchash]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff.zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+zilEpoch = 0
+pool1 = eu.ezil.me:4444
+pool2 = us-west.ezil.me:4444
+pool3 = asia.ezil.me:4444
 ```
 Example of a configuration file for Ethereum Classic:
 ```ini
@@ -456,17 +516,6 @@ Example of a minimum file for Monero:
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ```
 
-Example of a complete file for Cortex:
-```ini
-[Cuckaroo30]
-wallet = 0xffffffffffffffffffffffffffffffffffffffff
-rigName = rig1
-pool1=eu.frostypool.com:8008
-pool2=us.frostypool.com:8008
-pool3=asia.frostypool.com:8008
-sortPools=true
-```
-
 Example of a configuration file for Ravencoin:
 ```ini
 [Kawpow]
@@ -515,6 +564,16 @@ Example of a minimum file for Conflux:
 wallet = 0x1fffffffffffffffffffffffffffffffffffffff
 coin = CFX
 ```
+Example of a configuration file for Conflux and Zilliqa:
+```ini
+[Octopus]
+wallet = 0x1fffffffffffffffffffffffffffffffffffffff
+[Zilliqa]
+wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+pool1 = eu.ezil.me:5555
+pool2 = us-west.ezil.me:5555
+pool3 = asia.ezil.me:5555
+```
 
 Example of a complete file for VerusCoin:
 ```ini
@@ -562,17 +621,16 @@ coin=ergo
 wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
 ```
 
-Example of configuration file for mining Ethereum, Cortex, Ubiq and Monero on same 8 GPUs rig using separate devices:
+Example of configuration file for mining Ethereum, Ergo, Ubiq and Monero on same 8 GPUs rig using separate devices:
 
 ```ini
 rigName = rig1
 [Ethash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 devices = 0,1
-[Cuckaroo30]
-wallet = 0xffffffffffffffffffffffffffffffffffffffff
+[Autolykos]
+wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
 devices = 5
-pool1=eu.frostypool.com:8008
 [Ubqhash]
 wallet = 0x1111111111111111111111111111111111111111
 pool1 = eu.ubiqpool.io:8008
