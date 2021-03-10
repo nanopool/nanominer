@@ -32,6 +32,7 @@
 |    ETC+ZIL    |        &check;      |          &check;        |
 |    CFX+ZIL    |                     |          &check;        |
 |    ERG+ZIL    |                     |          &check;        |
+|    RVN+ZIL    |                     |          &check;        |
 When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0xffffffffffffffffffffffffffffffffffffffff` ETH/ETC address to authorize on Zilliqa pool.
 
 ## Driver requirements
