@@ -117,7 +117,7 @@ What follows is a list of the parameters that can be set on **nanominer**.
 Mandatory parameter.
 This is the user's wallet, where funds will be deposited.
 ### coin
-Optional algorithm parameter.
+Optional parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
 The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus), ERG (or Ergo), ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
 
@@ -125,7 +125,7 @@ The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (
 
 If the pools are clearly defined with the aid of the _pool1, pool2, ..._, parameters, then **nanominer** will function according to the tasks it receives from those pools.
 ### rigName
-Optional algorithm parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
+Optional parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
 This is the name of the rig (computer/worker). It will be displayed in the pool's statistics. If this parameter is not set, the program will generate a unique name and provide it to the pool. To disable rigname completely just set it to empty string with
 ```ini
 rigName=
@@ -134,22 +134,40 @@ rigName=
 Optional algorithm parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
 This is the user’s e-mail address. It is provided to the pool where the rig will be operating. The pool can use it when sending out service notifications.
 ### pool1, pool2, ...
-Optional algorithm parameter.
+Optional parameter.
 This defines the set of mining pools used. Values must be given in the format url:port (e.g. `pool1=eth-eu1.nanopool.org:9999`). The parameters should be defined in ascending, sequential order, from pool1 to poolN (for example: pool1, pool2, pool3). If the pool list is provided, the best pool will be chosen from the order of the pool list. If a `sortPools=true` option is specified, the best pool will be chosen by the connection speed. If the pool (or list of pools) is not defined, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) that correspond to the chosen cryptocurrency. For QuarkChain public full nodes are used if no pools are defined. For Ubiq [Ubiqpool.io](https://ubiqpool.io) pools are used if no pools are defined.
 
 ### protocol
-Optional algorithm parameter.
+Optional parameter.
 Can be used to set the pool protocol to _stratum_. If not specified, **nanominer** will try to detect the pool protocol automatically.
 
 ### rigPassword
-Optional algorithm parameter.
+Optional parameter.
 The password for the rig (or worker). It may be necessary when working with pools that require registration and setting a rig password.
 ### watchdog
-Optional common parameter.
+Optional parameter.
 This parameter manages the miner's restart function when running into critical GPU errors or lag. It accepts the values _true_ or _false_. By default, _true_ – automatic restart – is activated.
+### restarts
+Optional parameter.
+This parameter sets the number of times the miner will restart before rebooting the rig. In case of GPU problems like hardware errors or lag, or in case of hashrate degradation (if the _minhashrate_ option is used), **nanominer** will restart. However, certain errors cannot be fixed by restarting the program. In such cases it is necessary to reboot the rig. To reboot, the miner loads the _reboot.bat_ script from the current directory if running on Windows or _reboot.sh_ if on Linux:
+```
+reboot
+```
+**The reboot.sh file on Linux must be given execute permissions in order for it to work.**
+The typical content of the _reboot.bat_ script for Windows:
+```
+shutdown /r /t 5 /f
+```
+The script must be written by the user.
+To run reboot script instead of restarting miner every time a critical error occurs, just set `restarts=0`
+
 ### minHashrate
-Optional algorithm parameter.
-This is the minimum acceptable hashrate. This function keeps track of the rig's total hashrate and compares it with this parameter. If five minutes after the miner is launched the set minimum is not reached, **nanominer** will automatically restart. Likewise, the miner will restart if for any reason the average hashrate over a ten-minute period falls below the set value. This value can be set with an optional modifier letter that represents a thousand for kilohash or a million for megahash per second. For example, setting the value to 100 megahashes per second can be written as 100M, 100.0M, 100m, 100000k, 100000K or 100000000. If this parameter is not defined, the miner will not restart (with the exception of the situations described in the _watchdog_ section).
+Optional parameter.
+This is the minimum acceptable hashrate. This function keeps track of the rig's total hashrate and compares it with this parameter. If five minutes after the miner is launched the set minimum is not reached, **nanominer** will automatically restart. Likewise, the miner will restart if for any reason the average hashrate over a ten-minute period falls below the set value. This value can be set with an optional modifier letter that represents a thousand for kilohash or a million for megahash per second. For example, setting the value to 100 megahashes per second can be written as 100M, 100.0M, 100m, 100000k, 100000K or 100000000. If this parameter is not defined, the miner will not restart (with the exception of the situations described in the _watchdog_ section). Restarts caused by this option count towards the _restarts_ parameter.
+### maxRejectedShares
+Optional paramter.
+Can be used to set the maximum amount of rejected shares before restarting miner process/rebooting the rig. Restarts caused by this option count towards the _restarts_ parameter.
+Option is disabled by default.
 ### devices
 Optional paramter.
 These are the graphics cards that will be used by the miner. If you do not want to launch the miner on all available GPUs but only on some of them, their numbers can be provided in the _devices_ parameter separated by a comma or space. **nanominer** numbers the GPUs starting from zero in ascending order of their PCI addresses. You can see a list of available GPUs and the order in which they're in by launching **nanominer** with the _-d_ command line option:
@@ -167,29 +185,15 @@ devices=3,1,0
 then the hashrate line will first display GPU3, then GPU1 and finally GPU0.
 
 ### checkForUpdates
-Optional common parameter.
+Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _true_). If this parameter is set to _false_ then **nanominer** stops checking for the newest release version on every startup.
 
 ### autoUpdate
-Optional common parameter.
+Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ and checking for updates is enabled, then **nanominer** will update itself on every startup, provided there is a newer version available.
 
-### restarts
-Optional common parameter.
-This parameter sets the number of times the miner will restart before rebooting the rig. In case of GPU problems like hardware errors or lag, or in case of hashrate degradation (if the _minhashrate_ option is used), **nanominer** will restart. However, certain errors cannot be fixed by restarting the program. In such cases it is necessary to reboot the rig. To reboot, the miner loads the _reboot.bat_ script from the current directory if running on Windows or _reboot.sh_ if on Linux:
-```
-reboot
-```
-**The reboot.sh file on Linux must be given execute permissions in order for it to work.**
-The typical content of the _reboot.bat_ script for Windows:
-```
-shutdown /r /t 5 /f
-```
-The script must be written by the user.
-To run reboot script instead of restarting miner every time a critical error occurs, just set `restarts=0`
-
 ### coreClocks, memClocks
-Optional common parameters.
+Optional parameters.
 Can be used to overclock/underclock NVIDIA GPU's. Absolute (e.g. 4200) as well as relative (e.g. +200, -150) values in MHz are accepted. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). For example, if it is set as
 ```ini
 coreClocks=+200,-150
@@ -207,7 +211,7 @@ Optional common parameter.
 Can be used to set Nvidia cards power limits from -50 to 50. For example, -20 means 80% power limit, 10 means 110% power limit. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). You can also apply same settings for each GPU by defining only one power limit value.
 
 ### memTweak
-Optional common parameter.
+Optional parameter.
 Can be set to modify AMD GPU timings on the fly for Ethash/Etchash/Ubqhash algorithms. The following AMD ASICs are currently supported: gfx900, gfx901, gfx906, gfx907, Baffin, Ellesmere, gfx804, Hawaii, Tahiti, Pitcairn, Tonga.
 
 Miner must be launched using admin/root privileges in order to change timings.
@@ -224,36 +228,36 @@ memTweak=10
 ```
 
 ### epoch
-Optional algorithm parameter.
+Optional parameter.
 Ethash algorithm specific option to check miner behaviour on different Ethash epochs.
 
 ### zilEpoch
-Optional algorithm parameter.
+Optional parameter.
 Sets the epoch of Zilliqa DAG to store in GPU memory (default is 0).
 
 ### noLog
-Optional common parameter.
+Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then no log files will be recorded onto the hard drive.
 
 ### noColor
-Optional common parameter.
+Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the console output won't contain any colors.
 
 ### logPath
-Optional common parameter.
+Optional parameter.
 This parameter can either be used to set the name of the folder in which log files will be created (e.g. `logPath=logfolder/`), or to specify a path to single file, which will be used for all logs (e.g. `logPath=logs/log.txt`, `logPath=/var/log/nanominer/log.txt`, `logPath=C:\logs\log.txt`). Both relative and absolute paths work.
 Default value for this parameter is _logs/_.
 
 ### webPassword
-Optional common parameter.
+Optional parameter.
 Password for web interface. There is no password by default (web interface is read-only).
 
 ### webPort
-Optional common parameter.
+Optional parameter.
 Port for web interface. The default port is 9090. Zero value disables web interface.
 
 ### mport
-Optional common parameter.
+Optional parameter.
 This is the network port for remote monitoring and program management through EthMan or other programs that use a similar API protocol format.
 The program supports all API functions, including restarting the miner and rig(s).
 You can block miner management through API (in which case the miner will only display the statistics and won't respond to any commands). To enable this function, a "minus" (-) sign must be written before the port number.
@@ -261,38 +265,38 @@ And you can completely deactivate remote monitoring. To do this, the port number
 Default value: -3333 (This means that the miner blocks management through API and displays statistics on port 3333).
 
 ### ethmanPassword
-Optional common parameter.
+Optional parameter.
 Your password for monitoring with EthMan and other utilities that support the same network API.
 
 ### useSSL
-Optional common parameter.
+Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _true_). If this parameter is set to _true_ then miner always tries to use SSL pool connection first and fallbacks to unencrypted connection if SSL connection failed. If this parameter is set to _false_ then miner doesn't try using SSL for pool connection.
 
 ### shardId
-Optional algorithm parameter.
+Optional parameter.
 Can be used to set a shard ID for QuarkChain solo mining. This parameter should be specified in hex, e.g. 0x1, 0x10001, 0x10002, 0x50001, etc. For root chain shard ID `null` must be specified. For more information on shards, visit [this](https://github.com/QuarkChain/pyquarkchain/wiki/Address,-Shard-Key,-Chain-Id,-Shard-Id) and [this](https://github.com/quarkChain/pyquarkchain/releases/latest) link. Default shard ID is 0x1. Shard ID is passed to QuarkChain node "as is" so all current and future Ethash shards are supported.
 
 ### farmRecheck
-Optional algorithm parameter.
+Optional parameter.
 The interval (in milliseconds) between polling the node for new jobs in solo mining mode for QuarkChain. Default value is 200. 
 
 ### cpuThreads
-Optional algorithm parameter for CPU mining.
+Optional parameter for CPU mining.
 Specifies the number of concurrent CPU threads to use for mining. All threads are used by default.
 
 ### sortPools
-Optional algorithm parameter.
+Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the best pool will be chosen by least ping (not by the pool list).
 
 ### countDevShares
-Optional algorithm parameter.
+Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_ for QuarkChain solo mining and _true_ for other coins). If this parameter is set to _true_ then shares accepted or rejected by pool during fee time will be included in miner statistics. Otherwise only shares during user mining are included to miner statistics.
 
 ### sendHashrate
-Optional algorithm parameter for Ethash, Etchash and Ubqhash algorithms. This parameter accepts the values _true_ or _false_. The default value is _true_ (if JSON-RPC pool protocol is used).
+Optional parameter for Ethash, Etchash and Ubqhash algorithms. This parameter accepts the values _true_ or _false_. The default value is _true_ (if JSON-RPC pool protocol is used).
 
 ### dagSer
-Optional algorithm parameter for Ethash, Etchash and KawPow algorithms.
+Optional parameter for Ethash, Etchash and KawPow algorithms.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the DAG will be generated sequentionaly on each GPU. Otherwise all the GPUs generate DAG at the same time.
 
 ## Configuration File
