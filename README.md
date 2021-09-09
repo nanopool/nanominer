@@ -131,7 +131,7 @@ This is the name of the rig (computer/worker). It will be displayed in the pool'
 rigName=
 ```
 ### email
-Optional algorithm parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
+Optional parameter. Can be specified in common parameter section instead of the algorithm section to be applied for all algorithms at once.
 This is the user’s e-mail address. It is provided to the pool where the rig will be operating. The pool can use it when sending out service notifications.
 ### pool1, pool2, ...
 Optional parameter.
@@ -207,7 +207,7 @@ memClocks=+300
 ```
 
 ### powerLimits
-Optional common parameter.
+Optional parameter.
 Can be used to set Nvidia cards power limits from -50 to 50. For example, -20 means 80% power limit, 10 means 110% power limit. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). You can also apply same settings for each GPU by defining only one power limit value.
 
 ### memTweak
@@ -226,6 +226,10 @@ You can also apply same settings for each GPU by defining only one memory tweak 
 ```ini
 memTweak=10
 ```
+
+### fanSpeed
+Optional parameter.
+Used to set the GPU fan speed to a specific percentage from 30% to 100%. If below 30, automatically sets to 30. If the value is incorrect, i.e. negative or non-numeric value, sets to the last used value.
 
 ### epoch
 Optional parameter.
