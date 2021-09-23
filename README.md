@@ -24,8 +24,11 @@
 |  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |         |
 |  RandomX      |      XMR      |             2%              |             |             | &check; |
 |  Verushash    |      VRSC     |             2%              |             |             | &check; |
+|  Verthash     |      VTC      |             1%              |   &check;   |             |         |
+
 
 **nanominer** also supports Zilliqa mining is the current configurations (see config examples):
+
 | Configuration |  Merged (same pool) | Split (different pools) |
 |:-------------:|:-------------------:|:-----------------------:|
 |    ETH+ZIL    |        &check;      |          &check;        |
@@ -119,7 +122,7 @@ This is the user's wallet, where funds will be deposited.
 ### coin
 Optional parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus), ERG (or Ergo), ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus), ERG (or Ergo), VTC (or Vertcoin), ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -301,7 +304,7 @@ Optional parameter for Ethash, Etchash and Ubqhash algorithms. This parameter ac
 
 ### dagSer
 Optional parameter for Ethash, Etchash and KawPow algorithms.
-This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the DAG will be generated sequentionaly on each GPU. Otherwise all the GPUs generate DAG at the same time.
+This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the DAG will be generated sequentially on each GPU. Otherwise all the GPUs generate DAG at the same time.
 
 ## Configuration File
 The minimum configuration file for Ethereum may contain only a wallet:
@@ -321,16 +324,29 @@ In this case **nanominer** will use pools corresponding to Ethereum Classic.
 For coins that are not supported by [nanopool.org](https://nanopool.org/), **you must** specify a **wallet** and pools (**pool1...**).
 
 ## Launching from command line
-The best way to configure nanominer is using simple config file. For those who need to run a single command line for some reason there are scripts to do so in *helper_scripts* folder. A batch/shell file can be created to launch **nanominer** with command line arguments. This file must call the <i>cmdline_launcher</i> script (<i>cmdline_launcher.bat</i> on Windows, <i>cmdline_launcher.sh</i> on Linux), which converts the command line into a config called <i>config_cmdline.ini</i> and launches the miner with it. At least one algorithm and wallet must be passed to the <i>cmdline_launcher</i> script. All common config parameters in the command line must be specified before the first "algo" parameter. Here are some examples of command lines for launching Ethereum and Monero:
+It is possible to run nanominer from the command line with the desired arguments. At least one algorithm and wallet are required to be passed. All common config parameters in the command line must be specified before the first "algo" parameter. Here are some examples of command lines for launching Ethereum and Monero:
 
 Windows:
 ```
-cmdline_launcher -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
+nanominer.exe -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
 ```
 Linux:
 ```
-./cmdline_launcher.sh -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
+./nanominer -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
 ```
+
+If no algo specified, ethash is used by default. So the following commands will launch the ethash algorithm:
+
+Windows:
+```
+nanominer.exe -wallet YOUR_WALLET
+```
+Linux:
+```
+./nanominer -wallet YOUR_WALLET
+```
+
+The helper scripts folder with all of its contents is still there, for those who use it.
 
 ## Examples of Configuration Files
 Example of a configuration file for split Ethereum and Zilliqa:
