@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.3
+# version: 3.4
 # Table of Contents
 1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
@@ -19,6 +19,7 @@
 |  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |         |
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |         |
+|  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |         |
 |  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |         |
 |  Octopus      |      CFX      |             2%              |             |   &check;   |         |
 |  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |         |
@@ -36,6 +37,7 @@
 |    CFX+ZIL    |                     |          &check;        |
 |    ERG+ZIL    |                     |          &check;        |
 |    RVN+ZIL    |                     |          &check;        |
+|    FIRO+ZIL   |                     |          &check;        |
 When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0xffffffffffffffffffffffffffffffffffffffff` ETH/ETC address to authorize on Zilliqa pool.
 
 ## Driver requirements
@@ -46,7 +48,7 @@ Nvidia 30xx series of GPUs will only work with `cuda11` version of miner.
 
 In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
-Testing on **nanominer** demonstrated high performance working with Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Cortex, Ergo and other currencies. Ethash, Etchash and KawPow implementations have some know-how optimizations for DAG size in memory which is critical for 3 GB and 4 GB GPUs. Independently of this, **nanominer** stands out with its high stability and simple setup.
+Testing on **nanominer** demonstrated high performance working with Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Ergo, Firo and other currencies. Ethash, Etchash and KawPow implementations have some know-how optimizations for DAG size in memory which is critical for 3 GB and 4 GB GPUs. Independently of this, **nanominer** stands out with its high stability and simple setup.
 
 ## Reporting bugs and technical support
 For reporting bugs, technical support, feature requests and community discussions feel free to use the following communication channels:
@@ -122,7 +124,7 @@ This is the user's wallet, where funds will be deposited.
 ### coin
 Optional parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), CTXC (or Cortex), VRSC (or Verus), ERG (or Ergo), VTC (or Vertcoin), ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), VRSC (or Verus), ERG (or Ergo), VTC (or Vertcoin), FIRO, ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
 
 *Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
 
@@ -163,7 +165,6 @@ shutdown /r /t 5 /f
 ```
 The script must be written by the user.
 To run reboot script instead of restarting miner every time a critical error occurs, just set `restarts=0`
-
 ### minHashrate
 Optional parameter.
 This is the minimum acceptable hashrate. This function keeps track of the rig's total hashrate and compares it with this parameter. If five minutes after the miner is launched the set minimum is not reached, **nanominer** will automatically restart. Likewise, the miner will restart if for any reason the average hashrate over a ten-minute period falls below the set value. This value can be set with an optional modifier letter that represents a thousand for kilohash or a million for megahash per second. For example, setting the value to 100 megahashes per second can be written as 100M, 100.0M, 100m, 100000k, 100000K or 100000000. If this parameter is not defined, the miner will not restart (with the exception of the situations described in the _watchdog_ section). Restarts caused by this option count towards the _restarts_ parameter.
@@ -303,7 +304,7 @@ This parameter accepts the values _true_ or _false_ (the default is _false_ for 
 Optional parameter for Ethash, Etchash and Ubqhash algorithms. This parameter accepts the values _true_ or _false_. The default value is _true_ (if JSON-RPC pool protocol is used).
 
 ### dagSer
-Optional parameter for Ethash, Etchash and KawPow algorithms.
+Optional parameter for Ethash, Etchash, FiroPow and KawPow algorithms.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the DAG will be generated sequentially on each GPU. Otherwise all the GPUs generate DAG at the same time.
 
 ## Configuration File
@@ -644,6 +645,21 @@ Example of a minimum file for Ergo:
 ```ini
 coin=ergo
 wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
+```
+
+Example of a configuration file for Firo:
+```ini
+[FiroPow]
+wallet = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+coin=Firo
+rigName = rig1
+email = someemail@org
+pool1 = 54.38.92.217:22222
+
+```
+Example of a minimum file for Firo:
+```ini
+wallet=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ```
 
 Example of configuration file for mining Ethereum, Ergo, Ubiq and Monero on same 8 GPUs rig using separate devices:
