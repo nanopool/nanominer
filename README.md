@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.4
+# version: 3.5
 # Table of Contents
 1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
@@ -306,6 +306,14 @@ Optional parameter for Ethash, Etchash and Ubqhash algorithms. This parameter ac
 ### dagSer
 Optional parameter for Ethash, Etchash, FiroPow and KawPow algorithms.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the DAG will be generated sequentially on each GPU. Otherwise all the GPUs generate DAG at the same time.
+
+### lhr
+Optional parameter for Ethash and Etchash algorithms. Can be used to set desired percentage of full unlocked hashrate. Valid range is from 50 to 100. Also can be set to _off_ (-1) or _auto_ (0). Use _off_ for non-LHR cards and _auto_ for automatic LHR card detection and tuning. Default is _auto_. This parameter can be set for each GPU separately. In this case, order must correspond to the order of GPUs, specified in _devices_ parameter. For example:
+```ini
+devices=0,2,3
+lhr=71.5,off,0
+```
+means 71.5% for GPU0, _off_ for GPU2 and _auto_ for GPU3.
 
 ## Configuration File
 The minimum configuration file for Ethereum may contain only a wallet:
