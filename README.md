@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.5
+# version: 3.6
 # Table of Contents
 1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
@@ -299,6 +299,10 @@ This parameter accepts the values _true_ or _false_ (the default is _false_). If
 ### countDevShares
 Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_ for QuarkChain solo mining and _true_ for other coins). If this parameter is set to _true_ then shares accepted or rejected by pool during fee time will be included in miner statistics. Otherwise only shares during user mining are included to miner statistics.
+
+### validateShares
+Optional parameter.
+This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then shares of ethash algorithms family on AMD GPUs are validated by CPU. Also in this case share difficulty is shown for AMD GPUs.
 
 ### sendHashrate
 Optional parameter for Ethash, Etchash and Ubqhash algorithms. This parameter accepts the values _true_ or _false_. The default value is _true_ (if JSON-RPC pool protocol is used).
