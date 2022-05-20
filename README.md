@@ -12,6 +12,8 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
+**100% LHR unlock** for LHR v1 and v2 Nvidia GPUs.
+
 **nanominer** is a program product developed by nanopool to create structural cryptocurrency units based on the following algorithms:
 
 |     Algo      |     Coin      | Dev Fee (once per 2 hours)  |     AMD     |    Nvidia   |   CPU   |
