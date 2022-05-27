@@ -12,7 +12,8 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**100% LHR unlock** for LHR v1 and v2 Nvidia GPUs.
+**100% LHR unlock** for LHR v1 and v2 Nvidia GPUs. Recommended drivers: 512.77 on Windows and 510.60.02 on Linux.
+100% LHR unlock does not work on 512.95 and 515.x at this moment.
 
 **nanominer** is a program product developed by nanopool to create structural cryptocurrency units based on the following algorithms:
 
