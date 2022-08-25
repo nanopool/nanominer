@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.6
+# version: 3.7
 # Table of Contents
 1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
@@ -12,28 +12,25 @@
 1. [Launching from command line](#launching-from-command-line)
 1. [Examples of Configuration Files](#examples-of-configuration-files)
 
-**100% LHR unlock** for LHR v1 and v2 Nvidia GPUs. Recommended drivers: 512.77 on Windows and 510.60.02 on Linux.
-100% LHR unlock does not work on 512.95 and 515.x at this moment.
-
 **nanominer** is a program product developed by nanopool to create structural cryptocurrency units based on the following algorithms:
 
-|     Algo      |     Coin      | Dev Fee (once per 2 hours)  |     AMD     |    Nvidia   |   CPU   |
-|:-------------:|:-------------:|:---------------------------:|:-----------:|:-----------:|:-------:|
-|  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |         |
-|  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |         |
-|  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |         |
-|  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |         |
-|  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |         |
-|  Octopus      |      CFX      |             2%              |             |   &check;   |         |
-|  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |         |
-|  RandomX      |      XMR      |             2%              |             |             | &check; |
-|  Verushash    |      VRSC     |             2%              |             |             | &check; |
-|  Verthash     |      VTC      |             1%              |   &check;   |             |         |
+|     Algo      |     Coin      | Dev Fee (once per 2 hours)  |     AMD     |    Nvidia   |  Intel Arc  |   CPU   |
+|:-------------:|:-------------:|:---------------------------:|:-----------:|:-----------:|:-----------:|:-------:|
+|  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
+|  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
+|  Octopus      |      CFX      |             2%              |             |   &check;   |             |         |
+|  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
+|  RandomX      |      XMR      |             2%              |             |             |             | &check; |
+|  Verushash    |      VRSC     |             2%              |             |             |             | &check; |
+|  Verthash     |      VTC      |             1%              |   &check;   |             |             |         |
 
 
 **nanominer** also supports Zilliqa mining is the current configurations (see config examples):
 
-| Configuration |  Merged (same pool) | Split (different pools) |
+| Configuration |  Merged (same pool) | Split (different pools)†|
 |:-------------:|:-------------------:|:-----------------------:|
 |    ETH+ZIL    |        &check;      |          &check;        |
 |    ETC+ZIL    |        &check;      |          &check;        |
@@ -42,6 +39,7 @@
 |    RVN+ZIL    |                     |          &check;        |
 |    FIRO+ZIL   |                     |          &check;        |
 When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0xffffffffffffffffffffffffffffffffffffffff` ETH/ETC address to authorize on Zilliqa pool.
+† Intel Arc does not support split Zilliqa mining at this moment (under construction).
 
 ## Driver requirements
 
