@@ -197,6 +197,10 @@ This parameter accepts the values _true_ or _false_ (the default is _true_). If 
 Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ and checking for updates is enabled, then **nanominer** will update itself on every startup, provided there is a newer version available.
 
+### switchToEtc
+Optional parameter.
+This parameter accepts the values _true_ or _false_ (the default is _true_). If this parameter is set to _true_ then **nanominer** automatically will switch from Ethereum to Ethereum Classic when Ethereum moves to proof-of-stake. 
+
 ### coreClocks, memClocks
 Optional parameters.
 Can be used to overclock/underclock NVIDIA GPU's. Absolute (e.g. 4200) as well as relative (e.g. +200, -150) values in MHz are accepted. Parameter values must be separated by a comma or space (first value is for GPU0, second is for GPU1, and so on). For example, if it is set as
