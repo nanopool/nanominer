@@ -199,7 +199,11 @@ This parameter accepts the values _true_ or _false_ (the default is _false_). If
 
 ### switchToEtc
 Optional parameter.
-This parameter accepts the values _true_ or _false_ (the default is _true_). If this parameter is set to _true_ then **nanominer** automatically will switch from Ethereum to Ethereum Classic when Ethereum moves to proof-of-stake. 
+This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then **nanominer** automatically will switch from Ethereum to Ethereum Classic when Ethereum moves to proof-of-stake. 
+
+### walletEtc
+Optional parameter.
+This is the Ethereum Classic wallet, where funds will be deposited after switching from Ethereum.
 
 ### coreClocks, memClocks
 Optional parameters.
