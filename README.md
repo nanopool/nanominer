@@ -19,8 +19,9 @@
 |  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
-|  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
-|  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
+|  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |   &check;   |         |
+|  EvrProgPow   |      EVR      |             2%              |   &check;   |   &check;   |   &check;   |         |
 |  Octopus      |      CFX      |             2%              |             |   &check;   |             |         |
 |  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
 |  RandomX      |      XMR      |             2%              |             |             |             | &check; |
