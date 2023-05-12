@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.7
+# version: 3.8
 # Table of Contents
 1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
@@ -18,23 +18,29 @@
 |:-------------:|:-------------:|:---------------------------:|:-----------:|:-----------:|:-----------:|:-------:|
 |  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  Heavyhash    |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
-|  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |   &check;   |         |
-|  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |   &check;   |         |
-|  EvrProgPow   |      EVR      |             2%              |   &check;   |   &check;   |   &check;   |         |
+|  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
+|  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
 |  Octopus      |      CFX      |             2%              |             |   &check;   |             |         |
 |  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
 |  RandomX      |      XMR      |             2%              |             |             |             | &check; |
 |  Verushash    |      VRSC     |             2%              |             |             |             | &check; |
 |  Verthash     |      VTC      |             1%              |   &check;   |             |             |         |
 
+**nanominer** also supports dual mining on the all Kaspa supported platforms (see config examples):
+* ETH+KAS
+* ETC+KAS
+* ERG+KAS
 
-**nanominer** also supports Zilliqa mining is the current configurations (see config examples):
+
+**nanominer** also supports Zilliqa mining in the current configurations (see config examples):
 
 | Configuration |  Merged (same pool) | Split (different pools)†|
 |:-------------:|:-------------------:|:-----------------------:|
 |    ETH+ZIL    |        &check;      |          &check;        |
 |    ETC+ZIL    |        &check;      |          &check;        |
+|    KAS+ZIL    |                     |          &check;        |
 |    CFX+ZIL    |                     |          &check;        |
 |    ERG+ZIL    |                     |          &check;        |
 |    RVN+ZIL    |                     |          &check;        |
@@ -42,15 +48,29 @@
 When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0xffffffffffffffffffffffffffffffffffffffff` ETH/ETC address to authorize on Zilliqa pool.
 † Intel Arc does not support split Zilliqa mining at this moment (under construction).
 
+**nanominer** also supports trial mining:
+* ETH+KAS+ZIL
+* ETC+KAS+ZIL
+* ERG+KAS+ZIL
+
+**nanominer** also supports quad mining:
+* ETH+KAS+ZIL+XMR
+* ETC+KAS+ZIL+XMR
+* ERG+KAS+ZIL+XMR
+* ETC+KAS+ZIL+VRSC
+* ETH+KAS+ZIL+VRSC
+* ERG+KAS+ZIL+VRSC
+
+
 ## Driver requirements
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
 **nanominer cuda11** version needs Nvidia driver **455.23 and newer on Linux** or **456.38 and newer on Windows**.
 Nvidia 30xx series of GPUs will only work with `cuda11` version of miner.
 
-In order to begin mining Ethereum with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
+In order to begin mining Ethereum Classic with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
-Testing on **nanominer** demonstrated high performance working with Ethereum, Ravencoin, Ethereum Classic, Conflux, QuarkChain, Ubiq, Monero, Ergo, Firo and other currencies. Ethash, Etchash and KawPow implementations have some know-how optimizations for DAG size in memory which is critical for 3 GB and 4 GB GPUs. Independently of this, **nanominer** stands out with its high stability and simple setup.
+Testing on **nanominer** demonstrated high performance working with Ethereum Classic, EthereumPOW, Ravencoin, Conflux, QuarkChain, Ubiq, Monero, Ergo, Firo and other currencies. Ethash, Etchash and KawPow implementations have some know-how optimizations for DAG size in memory which is critical for 3 GB and 4 GB GPUs. Independently of this, **nanominer** stands out with its high stability and simple setup.
 
 ## Reporting bugs and technical support
 For reporting bugs, technical support, feature requests and community discussions feel free to use the following communication channels:
@@ -126,9 +146,9 @@ This is the user's wallet, where funds will be deposited.
 ### coin
 Optional parameter.
 This chooses the default coin for the pool. The default pool is [nanopool.org](https://nanopool.org/).
-The coin parameter accepts one of the following values: ETH (or Ethereum), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), VRSC (or Verus), ERG (or Ergo), VTC (or Vertcoin), FIRO, ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum, Ethereum Classic, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
+The coin parameter accepts one of the following values: ETHW (or EthereumPOW), ETC (or Ethereum Classic), RVN (or Raven), CFX (or Conflux), QKC (or QuarkChain), UBQ (or Ubiq), XMR (or Monero), VRSC (or Verus), ERG (or Ergo), VTC (or Vertcoin), FIRO, ZIL (or Zilliqa). When a coin is specified and equals one of the values mentioned above, **nanominer** automatically tries to determine the pool necessary for it to function if none have been provided in a separate parameter. If a coin is specified but **nanominer** cannot recognize it, then the name of the coin is used only for logging. If a coin is not specified, **nanominer** will use the default coin for the corresponding algorithm. Moreover, if [nanopool.org](https://nanopool.org/) is specified in the configuration file for Ethereum Classic, EthereumPOW, Ergo or Monero, **nanominer** will determine the coin from the pool's settings.
 
-*Important*: when using **nanominer** to mine Ethereum Classic on the default pool, it is necessary to define the coin (coin=ETC). In that case the pools will be determined automatically.
+*Important*: when using **nanominer** to mine EthereumPOW on the default pool, it is necessary to define the coin (coin=ETHW). In that case the pools will be determined automatically.
 
 If the pools are clearly defined with the aid of the _pool1, pool2, ..._, parameters, then **nanominer** will function according to the tasks it receives from those pools.
 ### rigName
@@ -142,7 +162,7 @@ Optional parameter. Can be specified in common parameter section instead of the 
 This is the user’s e-mail address. It is provided to the pool where the rig will be operating. The pool can use it when sending out service notifications.
 ### pool1, pool2, ...
 Optional parameter.
-This defines the set of mining pools used. Values must be given in the format url:port (e.g. `pool1=eth-eu1.nanopool.org:9999`). The parameters should be defined in ascending, sequential order, from pool1 to poolN (for example: pool1, pool2, pool3). If the pool list is provided, the best pool will be chosen from the order of the pool list. If a `sortPools=true` option is specified, the best pool will be chosen by the connection speed. If the pool (or list of pools) is not defined, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) that correspond to the chosen cryptocurrency. For QuarkChain public full nodes are used if no pools are defined. For Ubiq [Ubiqpool.io](https://ubiqpool.io) pools are used if no pools are defined.
+This defines the set of mining pools used. Values must be given in the format url:port (e.g. `pool1=etc-eu1.nanopool.org:19999`). The parameters should be defined in ascending, sequential order, from pool1 to poolN (for example: pool1, pool2, pool3). If the pool list is provided, the best pool will be chosen from the order of the pool list. If a `sortPools=true` option is specified, the best pool will be chosen by the connection speed. If the pool (or list of pools) is not defined, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) that correspond to the chosen cryptocurrency. For QuarkChain public full nodes are used if no pools are defined. For Ubiq [Ubiqpool.io](https://ubiqpool.io) pools are used if no pools are defined.
 
 ### protocol
 Optional parameter.
@@ -197,14 +217,6 @@ This parameter accepts the values _true_ or _false_ (the default is _true_). If 
 ### autoUpdate
 Optional parameter.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ and checking for updates is enabled, then **nanominer** will update itself on every startup, provided there is a newer version available.
-
-### switchToEtc
-Optional parameter.
-This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then **nanominer** automatically will switch from Ethereum to Ethereum Classic when Ethereum moves to proof-of-stake. 
-
-### walletEtc
-Optional parameter.
-This is the Ethereum Classic wallet, where funds will be deposited after switching from Ethereum.
 
 ### coreClocks, memClocks
 Optional parameters.
@@ -317,6 +329,13 @@ This parameter accepts the values _true_ or _false_ (the default is _false_). If
 ### sendHashrate
 Optional parameter for Ethash, Etchash and Ubqhash algorithms. This parameter accepts the values _true_ or _false_. The default value is _true_ (if JSON-RPC pool protocol is used).
 
+### silence
+Optional parameter. This parameter accepts the values from 0 to 3. Control the amount of information displayed in the logs and on the screen.
+0: All the information is logged. Default behaviour.
+1: Hide frequent job messages.
+2: Also hide shares messages.
+3: Also hide hashrate prints.
+
 ### dagSer
 Optional parameter for Ethash, Etchash, FiroPow and KawPow algorithms.
 This parameter accepts the values _true_ or _false_ (the default is _false_). If this parameter is set to _true_ then the DAG will be generated sequentially on each GPU. Otherwise all the GPUs generate DAG at the same time.
@@ -330,35 +349,35 @@ lhr=71.5,off,0
 means 71.5% for GPU0, _off_ for GPU2 and _auto_ for GPU3.
 
 ## Configuration File
-The minimum configuration file for Ethereum may contain only a wallet:
+The minimum configuration file for Ethereum Classic may contain only a wallet:
 ```ini
 wallet=<wallet>
 ```
-**nanominer** will automatically use Ethereum pools.
+**nanominer** will automatically use Ethereum Classic pools.
 
-To work with Ethereum Classic, the coin must be specified:
+To work with EthereumPOW, the coin must be specified:
 ```ini
 wallet=<wallet>
-coin=ETC
+coin=ETHW
 ```
-In this case **nanominer** will use pools corresponding to Ethereum Classic.
+In this case **nanominer** will use pools corresponding to EthereumPOW.
 
 ## IMPORTANT!
 For coins that are not supported by [nanopool.org](https://nanopool.org/), **you must** specify a **wallet** and pools (**pool1...**).
 
 ## Launching from command line
-It is possible to run nanominer from the command line with the desired arguments. At least one algorithm and wallet are required to be passed. All common config parameters in the command line must be specified before the first "algo" parameter. Here are some examples of command lines for launching Ethereum and Monero:
+It is possible to run nanominer from the command line with the desired arguments. At least one algorithm and wallet are required to be passed. All common config parameters in the command line must be specified before the first "algo" parameter. Here are some examples of command lines for launching Ethereum Classic and Monero:
 
 Windows:
 ```
-nanominer.exe -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
+nanominer.exe -algo etchash -wallet YOUR_ETC_WALLET -coin eth -rigName YOUR_ETC_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
 ```
 Linux:
 ```
-./nanominer -algo ethash -wallet YOUR_ETH_WALLET -coin eth -rigName YOUR_ETH_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
+./nanominer -algo etchash -wallet YOUR_ETC_WALLET -coin eth -rigName YOUR_ETC_WORKER -email YOUR_EMAIL -algo randomx -wallet YOUR_XMR_WALLET -coin xmr -rigName YOUR_XMR_WORKER -email YOUR_EMAIL 
 ```
 
-If no algo specified, ethash is used by default. So the following commands will launch the ethash algorithm:
+If no algo specified, etchash is used by default. So the following commands will launch the etchash algorithm:
 
 Windows:
 ```
@@ -372,39 +391,48 @@ Linux:
 The helper scripts folder with all of its contents is still there, for those who use it.
 
 ## Examples of Configuration Files
-Example of a configuration file for split Ethereum and Zilliqa:
+Example of configuration file for quad mining Ergo + Kaspa + Zilliqa + Monero
 ```ini
-[Ethash]
-wallet = 0xffffffffffffffffffffffffffffffffffffffff
-; nanopool by default
-[Zilliqa]
-wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-pool1 = eu.ezil.me:5555
-pool2 = us-west.ezil.me:5555
-pool3 = asia.ezil.me:5555
+[autolykos]
+wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
+; nanopool pools by default
+
+[zil]
+wallet = zil1rpxnv479xy9c2jlgry3wy3869rnt4rjvjwjtuv
+zilEpoch = 0 ; number of DAG epoch for caching
+pool1 = eu.ezil.me:4444
+
+[heavyhash]
+wallet = kaspa:qr36zdxs0dn3n0h799jhdl02qks5742lxjgmfsfj9xmlca7n4l6mw0s0n48nx
+rigname = test_speed
+pool1 = pool.woolypooly.com:3112
+
+
+[RandomX]
+coin = xmr
+wallet = 46TgqBPmxFYiEhWfwGMRWWaqyrardCVB2JtZCKyAmatGeuPWMsNAJmFU3cCiTSn16XT2nw5XMXcJVidVxR46F3i57N5K7NN
 ```
-Example of a configuration file for merged Ethereum and Zilliqa:
+
+Example of a configuration file for Kaspa:
 ```ini
-[Ethash]
-wallet = 0xffffffffffffffffffffffffffffffffffffffff.zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-zilEpoch = 0
-pool1 = eu.ezil.me:5555
-pool2 = us-west.ezil.me:5555
-pool3 = asia.ezil.me:5555
+wallet = kaspa:qr36zdxs0dn3n0h799jhdl02qks5742lxjgmfsfj9xmlca7n4l6mw0s0n48nx
+rigname = test_speed
+pool1 = pool.woolypooly.com:3112
 ```
-Example of a configuration file for Ethereum and Monero:
+
+Example of a configuration file for Ethereum Classic and Monero:
 ```ini
-[Ethash]
+[Etchash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
-pool1 = eth-eu1.nanopool.org:9999
-pool2 = eth-eu2.nanopool.org:9999
-pool3 = eth-us-east1.nanopool.org:9999
-pool4 = eth-us-west1.nanopool.org:9999
-pool5 = eth-asia1.nanopool.org:9999
-pool6 = eth-jp1.nanopool.org:9999
-pool7 = eth-au1.nanopool.org:9999
+pool1 = etc-eu1.nanopool.org:19999
+pool2 = etc-eu2.nanopool.org:19999
+pool3 = etc-us-east1.nanopool.org:19999
+pool4 = etc-us-west1.nanopool.org:19999
+pool5 = etc-asia1.nanopool.org:19999
+pool6 = etc-jp1.nanopool.org:19999
+pool7 = etc-au1.nanopool.org:19999
 [RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
@@ -415,32 +443,6 @@ pool3 = xmr-us-east1.nanopool.org:14433
 pool4 = xmr-us-west1.nanopool.org:14433
 pool5 = xmr-asia1.nanopool.org:14433
 ```
-Example of a configuration file for Ethereum:
-```ini
-[Ethash]
-wallet = 0xffffffffffffffffffffffffffffffffffffffff
-rigName = rig1
-email = someemail@org
-pool1 = eth-eu1.nanopool.org:9999
-pool2 = eth-eu2.nanopool.org:9999
-pool3 = eth-us-east1.nanopool.org:9999
-pool4 = eth-us-west1.nanopool.org:9999
-pool5 = eth-asia1.nanopool.org:9999
-pool6 = eth-jp1.nanopool.org:9999
-pool7 = eth-au1.nanopool.org:9999
-```
-Example of an equivalent file for Ethereum:
-```ini
-[Ethash]
-wallet = 0xffffffffffffffffffffffffffffffffffffffff
-rigName = rig1
-email = someemail@org
-```
-Example of a minimum file for Ethereum:
-```ini
-[Ethash]
-wallet=0xffffffffffffffffffffffffffffffffffffffff
-```
 Example of a configuration file for split Ethereum Classic and Zilliqa:
 ```ini
 [Etchash]
@@ -448,10 +450,11 @@ wallet = 0xffffffffffffffffffffffffffffffffffffffff
 ; nanopool by default
 [Zilliqa]
 wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-pool1 = eu.ezil.me:5555
-pool2 = us-west.ezil.me:5555
-pool3 = asia.ezil.me:5555
+pool1 = eu.ezil.me:4444
+pool2 = us-west.ezil.me:4444
+pool3 = asia.ezil.me:4444
 ```
+
 Example of a configuration file for merged Ethereum Classic and Zilliqa:
 ```ini
 [Etchash]
@@ -465,7 +468,6 @@ Example of a configuration file for Ethereum Classic:
 ```ini
 [Etchash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
-coin=Etc
 rigName = rig1
 email = someemail@org
 pool1 = etc-eu1.nanopool.org:19999
@@ -480,7 +482,6 @@ Example of an equivalent file for Ethereum Classic:
 ```ini
 [Etchash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
-coin=Etc
 rigName = rig1
 email = someemail@org
 ```
@@ -488,7 +489,46 @@ Example of a minimum file for Ethereum Classic:
 ```ini
 [Etchash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
-coin=Etc
+```
+Example of a configuration file for split EthereumPOW and Zilliqa:
+```ini
+[Ethash]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff
+; nanopool by default
+[Zilliqa]
+wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+pool1 = eu.ezil.me:4444
+pool2 = us-west.ezil.me:4444
+pool3 = asia.ezil.me:4444
+```
+Example of a configuration file for EthereumPOW:
+```ini
+[Ethash]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff
+coin=ETHW
+rigName = rig1
+email = someemail@org
+pool1 = ethw-eu1.nanopool.org:15433
+pool2 = ethw-eu2.nanopool.org:15433
+pool3 = ethw-us-east1.nanopool.org:15433
+pool4 = ethw-us-west1.nanopool.org:15433
+pool5 = ethw-asia1.nanopool.org:15433
+pool6 = ethw-jp1.nanopool.org:15433
+pool7 = ethw-au1.nanopool.org:15433
+```
+Example of an equivalent file for EthereumPOW:
+```ini
+[Ethash]
+wallet = 0xffffffffffffffffffffffffffffffffffffffff
+coin=ETHW
+rigName = rig1
+email = someemail@org
+```
+Example of a minimum file for EthereumPOW:
+```ini
+[Ethash]
+wallet=0xffffffffffffffffffffffffffffffffffffffff
+coin=ETHW
 ```
 Example of a complete configuration file for solo QuarkChain mining:
 ```ini
@@ -618,9 +658,9 @@ Example of a configuration file for Conflux and Zilliqa:
 wallet = 0x1fffffffffffffffffffffffffffffffffffffff
 [Zilliqa]
 wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-pool1 = eu.ezil.me:5555
-pool2 = us-west.ezil.me:5555
-pool3 = asia.ezil.me:5555
+pool1 = eu.ezil.me:4444
+pool2 = us-west.ezil.me:4444
+pool3 = asia.ezil.me:4444
 ```
 
 Example of a complete file for VerusCoin:
@@ -676,7 +716,7 @@ wallet = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 coin=Firo
 rigName = rig1
 email = someemail@org
-pool1 = 54.38.92.217:22222
+pool1 = firo-eu1.picopool.org:22222
 
 ```
 Example of a minimum file for Firo:
@@ -684,11 +724,24 @@ Example of a minimum file for Firo:
 wallet=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ```
 
-Example of configuration file for mining Ethereum, Ergo, Ubiq and Monero on same 8 GPUs rig using separate devices:
+Example of dual mining Kaspa + Zilliqa
+```ini
+[heavyhash]
+silence = 1 ; hide frequent job messages
+wallet = kaspa:qr36zdxs0dn3n0h799jhdl02qks5742lxjgmfsfj9xmlca7n4l6mw0s0n48nx
+rigname = test_speed
+pool1 = pool.woolypooly.com:3112
 
+[zil]
+wallet = zil1rpxnv479xy9c2jlgry3wy3869rnt4rjvjwjtuv
+zilEpoch = 0 ; number of DAG epoch for caching
+pool1 = eu.ezil.me:4444
+```
+
+Example of configuration file for mining Ethereum Classic, Ergo, Ubiq and Monero on same 8 GPUs rig using separate devices:
 ```ini
 rigName = rig1
-[Ethash]
+[Etchash]
 wallet = 0xffffffffffffffffffffffffffffffffffffffff
 devices = 0,1
 [Autolykos]
@@ -701,3 +754,4 @@ devices = 2,3,4,6,7
 [RandomX]
 wallet=fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ```
+
