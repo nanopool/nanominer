@@ -16,14 +16,14 @@
 
 |     Algo      |     Coin      | Dev Fee (once per 2 hours)  |     AMD     |    Nvidia   |  Intel Arc  |   CPU   |
 |:-------------:|:-------------:|:---------------------------:|:-----------:|:-----------:|:-----------:|:-------:|
-|  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  Ethash       |  ETHW & other |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
-|  Heavyhash    |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
+|  kHeavyhash   |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
 |  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
 |  Octopus      |      CFX      |             2%              |             |   &check;   |             |         |
-|  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
+|  Autolykos2   |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
 |  RandomX      |      XMR      |             2%              |             |             |             | &check; |
 |  Verushash    |      VRSC     |             2%              |             |             |             | &check; |
 |  Verthash     |      VTC      |             1%              |   &check;   |             |             |         |
