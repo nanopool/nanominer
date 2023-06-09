@@ -22,7 +22,7 @@
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
 |  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
-|  Octopus      |      CFX      |             2%              |             |   &check;   |             |         |
+|  Octopus      |      CFX      |             2%              |   &check;   |   &check;   |             |         |
 |  Autolykos2   |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
 |  RandomX      |      XMR      |             2%              |             |             |             | &check; |
 |  Verushash    |      VRSC     |             2%              |             |             |             | &check; |
