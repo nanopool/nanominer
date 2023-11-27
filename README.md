@@ -18,6 +18,7 @@
 |:-------------:|:-------------:|:---------------------------:|:-----------:|:-----------:|:-----------:|:-------:|
 |  Ethash       |  ETHW & other |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  EthashB3     |      RTH      |             1%              |   &check;   |   &check;   |             |         |
 |  kHeavyhash   |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
