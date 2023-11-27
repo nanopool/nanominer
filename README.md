@@ -30,8 +30,7 @@
 |  Verthash     |      VTC      |             1%              |   &check;   |             |             |         |
 
 **nanominer** also supports dual mining on the all Kaspa supported platforms (see config examples):
-* ETH+KAS
-* ETC+KAS
+* (ETH/ETC/RTH)+KAS
 * ERG+KAS
 
 
@@ -50,16 +49,13 @@ When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0
 † Intel Arc does not support split Zilliqa mining at this moment (under construction).
 
 **nanominer** also supports trial mining:
-* ETH+KAS+ZIL
-* ETC+KAS+ZIL
+* (ETH/ETC/RTH)+KAS+ZIL
 * ERG+KAS+ZIL
 
 **nanominer** also supports quad mining:
-* ETH+KAS+ZIL+XMR
-* ETC+KAS+ZIL+XMR
+* (ETH/ETC/RTH)+KAS+ZIL+XMR
 * ERG+KAS+ZIL+XMR
-* ETC+KAS+ZIL+VRSC
-* ETH+KAS+ZIL+VRSC
+* (ETH/ETC/RTH)+KAS+ZIL+VRSC
 * ERG+KAS+ZIL+VRSC
 
 
