@@ -16,21 +16,23 @@
 
 |     Algo      |     Coin      | Dev Fee (once per 2 hours)  |     AMD     |    Nvidia   |  Intel Arc  |   CPU   |
 |:-------------:|:-------------:|:---------------------------:|:-----------:|:-----------:|:-----------:|:-------:|
-|  Ethash       |  ETHW & other |             1%              |   &check;   |   &check;   |   &check;   |         |
+|  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  EthashB3     |      RTH      |             1%              |   &check;   |   &check;   |             |         |
-|  kHeavyhash   |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
+|  Heavyhash    |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
 |  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
-|  Octopus      |      CFX      |             2%              |   &check;   |   &check;   |             |         |
-|  Autolykos2   |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
+|  Octopus      |      CFX      |             2%              |             |   &check;   |             |         |
+|  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
 |  RandomX      |      XMR      |             2%              |             |             |             | &check; |
+|  RandomNevo   |      NEVO     |             2%              |             |             |             | &check; |
 |  Verushash    |      VRSC     |             2%              |             |             |             | &check; |
 |  Verthash     |      VTC      |             1%              |   &check;   |             |             |         |
 
 **nanominer** also supports dual mining on the all Kaspa supported platforms (see config examples):
-* (ETH/ETC/RTH)+KAS
+* ETH+KAS
+* ETC+KAS
 * ERG+KAS
 
 
@@ -49,13 +51,16 @@ When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0
 † Intel Arc does not support split Zilliqa mining at this moment (under construction).
 
 **nanominer** also supports trial mining:
-* (ETH/ETC/RTH)+KAS+ZIL
+* ETH+KAS+ZIL
+* ETC+KAS+ZIL
 * ERG+KAS+ZIL
 
 **nanominer** also supports quad mining:
-* (ETH/ETC/RTH)+KAS+ZIL+XMR
+* ETH+KAS+ZIL+XMR
+* ETC+KAS+ZIL+XMR
 * ERG+KAS+ZIL+XMR
-* (ETH/ETC/RTH)+KAS+ZIL+VRSC
+* ETC+KAS+ZIL+VRSC
+* ETH+KAS+ZIL+VRSC
 * ERG+KAS+ZIL+VRSC
 
 
