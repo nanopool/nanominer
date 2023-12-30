@@ -20,6 +20,7 @@
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  EthashB3     |      RTH      |             1%              |   &check;   |   &check;   |             |         |
 |  Heavyhash    |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
+|  Karlsenhash  |      KLS      |             1%              |             |   &check;   |             |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
 |  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
