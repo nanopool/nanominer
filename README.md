@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.8
+# version: 3.9
 # Table of Contents
 1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
@@ -19,15 +19,16 @@
 |  Ethash       |  ETH & other  |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  EthashB3     |      RTH      |             1%              |   &check;   |   &check;   |             |         |
+|  FishHash     |      IRON     |             1%              |   &check;   |   &check;   |             |         |
 |  Heavyhash    |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
-|  Karlsenhash  |      KLS      |             1%              |             |   &check;   |             |         |
+|  Karlsenhash  |      KLS      |             1%              |   &check;   |   &check;   |             |         |
 |  Pyrinhash    |      PYI      |             1%              |             |   &check;   |             |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
 |  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
 |  Octopus      |      CFX      |             2%              |             |   &check;   |             |         |
 |  Autolykos    |      ERG      |            2.5%             |   &check;   |   &check;   |             |         |
-|  RandomX      |      XMR      |             2%              |             |             |             | &check; |
+|  RandomX      | XMR, ZEPH, ...|             2%              |             |             |             | &check; |
 |  RandomNevo   |      NEVO     |             2%              |             |             |             | &check; |
 |  Verushash    |      VRSC     |             2%              |             |             |             | &check; |
 |  Verthash     |      VTC      |             1%              |   &check;   |             |             |         |
@@ -58,13 +59,14 @@ When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0
 * ERG+KAS+ZIL
 
 **nanominer** also supports quad mining:
-* ETH+KAS+ZIL+XMR
+* ETH+KAS+ZIL+XMR†
 * ETC+KAS+ZIL+XMR
 * ERG+KAS+ZIL+XMR
 * ETC+KAS+ZIL+VRSC
 * ETH+KAS+ZIL+VRSC
 * ERG+KAS+ZIL+VRSC
 
+† Also supported other RandomX family coins (ZEPH, NEVO, ...)
 
 ## Driver requirements
 
@@ -447,7 +449,6 @@ pool3 = xmr-us-east1.nanopool.org:14433
 pool4 = xmr-us-west1.nanopool.org:14433
 pool5 = xmr-asia1.nanopool.org:14433
 ```
-
 Example of a configuration file for split Ethereum Classic and Zilliqa:
 ```ini
 [Etchash]
@@ -469,7 +470,6 @@ pool1 = eu.ezil.me:4444
 pool2 = us-west.ezil.me:4444
 pool3 = asia.ezil.me:4444
 ```
-
 Example of a configuration file for Ethereum Classic:
 ```ini
 [Etchash]
@@ -484,7 +484,6 @@ pool5 = etc-asia1.nanopool.org:19999
 pool6 = etc-jp1.nanopool.org:19999
 pool7 = etc-au1.nanopool.org:19999
 ```
-
 Example of an equivalent file for Ethereum Classic:
 ```ini
 [Etchash]
@@ -492,13 +491,11 @@ wallet = 0xffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
 ```
-
 Example of a minimum file for Ethereum Classic:
 ```ini
 [Etchash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 ```
-
 Example of a configuration file for split EthereumPOW and Zilliqa:
 ```ini
 [Ethash]
@@ -510,7 +507,6 @@ pool1 = eu.ezil.me:4444
 pool2 = us-west.ezil.me:4444
 pool3 = asia.ezil.me:4444
 ```
-
 Example of a configuration file for EthereumPOW:
 ```ini
 [Ethash]
@@ -526,7 +522,6 @@ pool5 = ethw-asia1.nanopool.org:15433
 pool6 = ethw-jp1.nanopool.org:15433
 pool7 = ethw-au1.nanopool.org:15433
 ```
-
 Example of an equivalent file for EthereumPOW:
 ```ini
 [Ethash]
@@ -535,14 +530,12 @@ coin=ETHW
 rigName = rig1
 email = someemail@org
 ```
-
 Example of a minimum file for EthereumPOW:
 ```ini
 [Ethash]
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 coin=ETHW
 ```
-
 Example of a complete configuration file for solo QuarkChain mining:
 ```ini
 [Ethash]
@@ -553,7 +546,6 @@ coin=Qkc
 pool1=localhost:38391
 protocol=getwork
 ```
-
 Example of a minimum file for solo QuarkChain mining:
 ```ini
 [Ethash]
@@ -562,7 +554,6 @@ coin=Qkc
 pool1=localhost:38391
 shardId=0x50001
 ```
-
 Example of a file for solo QuarkChain mining on root shard:
 ```ini
 [Ethash]
@@ -571,7 +562,6 @@ coin=Qkc
 pool1=localhost:38391
 shardId=null
 ```
-
 Example of a minimum file for QuarkChain mining using public nodes:
 ```ini
 [Ethash]
@@ -590,13 +580,11 @@ email = someemail@org
 pool1 = us.ubiqpool.io:8008
 pool2 = eu.ubiqpool.io:8008
 ```
-
 Example of a minimum file for Ubiq:
 ```ini
 coin=UBQ
 wallet=0xffffffffffffffffffffffffffffffffffffffff
 ```
-
 Example of a complete file for Monero:
 ```ini
 [RandomX]
@@ -609,7 +597,6 @@ pool3 = xmr-us-east1.nanopool.org:14433
 pool4 = xmr-us-west1.nanopool.org:14433
 pool5 = xmr-asia1.nanopool.org:14433
 ```
-
 Example of an equivalent file for Monero:
 ```ini
 [RandomX]
@@ -621,6 +608,13 @@ Example of a minimum file for Monero:
 ```ini
 [RandomX]
 wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+```
+
+Example of a minimum file for Zephyr:
+```ini
+[RandomX]
+wallet = fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+pool1 = zeph-eu1.nanopool.org:10943
 ```
 
 Example of a configuration file for Ravencoin:
@@ -647,7 +641,7 @@ wallet=Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 Example of a complete file for Conflux:
 ```ini
 [Octopus]
-wallet = 0x1fffffffffffffffffffffffffffffffffffffff
+wallet = cfx:ffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
 pool1=cfx-eu1.nanopool.org:17433
@@ -662,19 +656,19 @@ pool7=cfx-au1.nanopool.org:17433
 Example of an equivalent file for Conflux:
 ```ini
 [Octopus]
-wallet = 0x1fffffffffffffffffffffffffffffffffffffff
+wallet = cfx:ffffffffffffffffffffffffffffffffffffffffff
 rigName = rig1
 email = someemail@org
 ```
 Example of a minimum file for Conflux:
 ```ini
-wallet = 0x1fffffffffffffffffffffffffffffffffffffff
+wallet = cfx:ffffffffffffffffffffffffffffffffffffffffff
 coin = CFX
 ```
 Example of a configuration file for Conflux and Zilliqa:
 ```ini
 [Octopus]
-wallet = 0x1fffffffffffffffffffffffffffffffffffffff
+wallet = cfx:ffffffffffffffffffffffffffffffffffffffffff
 [Zilliqa]
 wallet = zilxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 pool1 = eu.ezil.me:4444
@@ -713,8 +707,8 @@ pool4 = ergo-eu2.nanopool.org:11433
 pool5 = ergo-asia1.nanopool.org:11433
 pool6 = ergo-jp1.nanopool.org:11433
 pool7 = ergo-au1.nanopool.org:11433
-
 ```
+
 Example of an equivalent file for Ergo:
 ```ini
 [autolykos]
@@ -738,16 +732,11 @@ email = someemail@org
 pool1 = firo-eu1.picopool.org:22222
 
 ```
-Example of a minimum file for Firo:
-```ini
-wallet=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
 
-Example of a configuration file for Pyrin:
+Example of IronFish
 ```ini
-silence = 1 ; hide frequent job messages
-pool1 = de.pyrin.herominers.com:1177
-wallet = pyrin:qp4p5x4k7rtm2mkz0rj6fgqqlkhdhx3r9s3fjzmsh273llu2snx9swsx0psgx
+[fishhash]
+wallet = 388b74938c5996a491d315cc75d425832ed47bcf258c7759a5e275fc84a3fa5d
 ```
 
 Example of dual mining Kaspa + Zilliqa
@@ -781,3 +770,17 @@ devices = 2,3,4,6,7
 wallet=fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ```
 
+Example of configuration file for mining Raven, Zilliqa and Nevocoin:
+```ini
+[kawpow]
+wallet = RRL5mMNeox75MGbqnfUZEhn3RferuvFGcy
+
+[zil]
+wallet = zil1rpxnv479xy9c2jlgry3wy3869rnt4rjvjwjtuv
+zilEpoch = 1 ; number of DAG epoch for caching
+pool1 = eu.ezil.me:4444
+
+[RandomNevo]
+wallet = NS3B3hTCmhMZiMMpm7mPv56mLWGjUntbcUGiDtXyMHkh31PPd2kuyW6bTs7urbpLUPR2AZVWMgTmY5C6LEaiQeA41mTKBSZ9c
+pool1 = nevocoin.ch:2052
+```
