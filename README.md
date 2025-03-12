@@ -1,5 +1,5 @@
 # nanominer by nanopool
-# version: 3.9
+# version: 3.10
 # Table of Contents
 1. [Driver requirements](#driver-requirements)
 1. [Reporting bugs and technical support](#reporting-bugs-and-technical-support)
@@ -20,9 +20,7 @@
 |  Etchash      |      ETC      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  EthashB3     |      RTH      |             1%              |   &check;   |   &check;   |             |         |
 |  FishHash     |      IRON     |             1%              |   &check;   |   &check;   |             |         |
-|  Heavyhash    |      Kaspa    |             1%              |   &check;   |   &check;   |             |         |
-|  Karlsenhash  |      KLS      |             1%              |   &check;   |   &check;   |             |         |
-|  Pyrinhash    |      PYI      |             1%              |             |   &check;   |             |         |
+|  Karlsenhashv2|      KLS      |             1%              |   &check;   |   &check;   |             |         |
 |  Ubqhash      |      UBQ      |             1%              |   &check;   |   &check;   |   &check;   |         |
 |  FiroPow      |      FIRO     |             1%              |   &check;   |   &check;   |             |         |
 |  KawPow       |      RVN      |             2%              |   &check;   |   &check;   |             |         |
@@ -33,19 +31,13 @@
 |  Verushash    |      VRSC     |             2%              |             |             |             | &check; |
 |  Verthash     |      VTC      |             1%              |   &check;   |             |             |         |
 
-**nanominer** also supports dual mining on the all Kaspa supported platforms (see config examples):
-* ETH+KAS
-* ETC+KAS
-* ERG+KAS
-
 
 **nanominer** also supports Zilliqa mining in the current configurations (see config examples):
 
 | Configuration |  Merged (same pool) | Split (different pools)†|
 |:-------------:|:-------------------:|:-----------------------:|
-|    ETH+ZIL    |        &check;      |          &check;        |
 |    ETC+ZIL    |        &check;      |          &check;        |
-|    KAS+ZIL    |                     |          &check;        |
+|    KLS+ZIL    |                     |          &check;        |
 |    CFX+ZIL    |                     |          &check;        |
 |    ERG+ZIL    |                     |          &check;        |
 |    RVN+ZIL    |                     |          &check;        |
@@ -54,25 +46,12 @@ When mining Zilliqa on a different pool, **nanominer** will use a placeholder `0
 † Intel Arc does not support split Zilliqa mining at this moment (under construction).
 
 **nanominer** also supports trial mining:
-* ETH+KAS+ZIL
-* ETC+KAS+ZIL
-* ERG+KAS+ZIL
+ {`ETC`,`CFX`,`RVN`,`KLS`,`FIRO`,`ERG`,`...`}+`ZIL`+{CPU coin}
 
-**nanominer** also supports quad mining:
-* ETH+KAS+ZIL+XMR†
-* ETC+KAS+ZIL+XMR
-* ERG+KAS+ZIL+XMR
-* ETC+KAS+ZIL+VRSC
-* ETH+KAS+ZIL+VRSC
-* ERG+KAS+ZIL+VRSC
-
-† Also supported other RandomX family coins (ZEPH, NEVO, ...)
 
 ## Driver requirements
 
 In order to work with Nvidia GPUs **nanominer** needs Nvidia driver **410.48 and newer on Linux** or **411.31 and newer on Windows**.
-**nanominer cuda11** version needs Nvidia driver **455.23 and newer on Linux** or **456.38 and newer on Windows**.
-Nvidia 30xx series of GPUs will only work with `cuda11` version of miner.
 
 In order to begin mining Ethereum Classic with nanominer, ***it's enough to simply input your wallet*** in the configuration file.
 
@@ -397,34 +376,6 @@ Linux:
 The helper scripts folder with all of its contents is still there, for those who use it.
 
 ## Examples of Configuration Files
-Example of configuration file for quad mining Ergo + Kaspa + Zilliqa + Monero
-```ini
-[autolykos]
-wallet = 9he6BZYMN8FMKxYKsqPvQJ6fbNar4bWuhJsR9JJt4x9Z6fiqSo1
-; nanopool pools by default
-
-[zil]
-wallet = zil1rpxnv479xy9c2jlgry3wy3869rnt4rjvjwjtuv
-zilEpoch = 0 ; number of DAG epoch for caching
-pool1 = eu.ezil.me:4444
-
-[heavyhash]
-wallet = kaspa:qr36zdxs0dn3n0h799jhdl02qks5742lxjgmfsfj9xmlca7n4l6mw0s0n48nx
-rigname = test_speed
-pool1 = pool.woolypooly.com:3112
-
-
-[RandomX]
-coin = xmr
-wallet = 46TgqBPmxFYiEhWfwGMRWWaqyrardCVB2JtZCKyAmatGeuPWMsNAJmFU3cCiTSn16XT2nw5XMXcJVidVxR46F3i57N5K7NN
-```
-
-Example of a configuration file for Kaspa:
-```ini
-wallet = kaspa:qr36zdxs0dn3n0h799jhdl02qks5742lxjgmfsfj9xmlca7n4l6mw0s0n48nx
-rigname = test_speed
-pool1 = pool.woolypooly.com:3112
-```
 
 Example of a configuration file for Ethereum Classic and Monero:
 ```ini
@@ -739,18 +690,15 @@ Example of IronFish
 wallet = 388b74938c5996a491d315cc75d425832ed47bcf258c7759a5e275fc84a3fa5d
 ```
 
-Example of dual mining Kaspa + Zilliqa
+Example of dual mining ETC + Zilliqa
 ```ini
-[heavyhash]
-silence = 1 ; hide frequent job messages
-wallet = kaspa:qr36zdxs0dn3n0h799jhdl02qks5742lxjgmfsfj9xmlca7n4l6mw0s0n48nx
-rigname = test_speed
-pool1 = pool.woolypooly.com:3112
+[etchash]
+wallet = 0x9eab4b0fc468a7f5d46228bf5a76cb52370d068d
 
 [zil]
 wallet = zil1rpxnv479xy9c2jlgry3wy3869rnt4rjvjwjtuv
-zilEpoch = 0 ; number of DAG epoch for caching
-pool1 = eu.ezil.me:4444
+pool1 = eu.etc.k1pool.com:1111
+zilEpoch = 1 ; number of DAG epoch for caching
 ```
 
 Example of configuration file for mining Ethereum Classic, Ergo, Ubiq and Monero on same 8 GPUs rig using separate devices:
