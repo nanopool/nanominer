@@ -76,6 +76,25 @@ When launching with the _-d_ command line option (e.g. `nanominer.exe -d`) the m
 **nanominer** does not require any pools to be specified in the config file. If a pool (or list of pools) is not specified, **nanominer** will automatically use the pools on [nanopool.org](https://nanopool.org/) corresponding to the chosen cryptocurrency (except for coins not listed on Nanopool). QuarkChain public full nodes (fullnode.quarkchain.io and fullnode2.quarkchain.io) which are maintained by QuarkChain developers are used by default for QuarkChain.
 
 When **nanominer** starts up it displays the main work information in the console log, including the program’s current version, the name of the rig, the number and type of graphics cards installed and the program’s current settings.
+
+To run **nanominer** as a service on Ubuntu 18.04, move all the files into the `/opt` directory and create the script below inside the `/lib/systemd/system/nanominer.service`:
+
+    [Unit]
+    Description = Nanominer
+    After = network.target
+
+    [Service]
+    WorkingDirectory = /opt/nanominer
+    ExecStart = /opt/nanominer/nanominer
+
+    [Install]
+    WantedBy = multi-user.target
+    
+Then you can run:
+
+    sudo systemctl start nanominer.service
+    sudo systemctl enable nanominer.service    
+
 ## Log Files
 The event log function on **nanominer** is automatically activated each time the program starts up. The log files that are created contain all the information displayed on the console while the miner is running. By default, the log files are saved in the logs folder of the program's current directory. Deactivating event logging, as well as assigning a random catalogue for recording log files, can be done by using the corresponding configuration parameters (see the examples in the _Parameters_ section of this file).
 
